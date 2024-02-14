@@ -31,24 +31,28 @@ public class ApoyoPuntoVenta {
                 "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
         };
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("\nIntroduzca el mes en formato numérico: ");
-        int num_mes = scanner.nextInt();
 
-        System.out.println("\nLa tabla se está generando...");
-        int primer_mes = num_mes - 1;
+        while (true) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("\nIntroduzca el mes en formato numérico: ");
+            int num_mes = scanner.nextInt();
 
-        if (primer_mes >= 0 && primer_mes < meses.length) {
-            String cadena_meses = "";
+            System.out.println("\nLa tabla se está generando...");
+            int primer_mes = num_mes - 1;
 
-            for (int i = 0; i < meses.length; i++) {
-                cadena_meses += (meses[(primer_mes + i) % meses.length] + ", ");
+            if (primer_mes >= 0 && num_mes <= 12) {
+                String cadena_meses = "";
+
+                for (int i = 0; i < meses.length; i++) {
+                    cadena_meses += (meses[(primer_mes + i) % meses.length] + ", ");
+                }
+
+                System.out.println("\nEl resultado solicitado es:\n" + cadena_meses);
+                break;
             }
-
-            System.out.println("\nEl resultado solicitado es:\n" + cadena_meses);
-        }
-        else {
-            System.out.println("Mes no válido.");
+            else {
+                System.out.println("\nMes no válido.");
+            }
         }
     }
 }
