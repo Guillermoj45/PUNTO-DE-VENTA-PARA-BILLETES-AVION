@@ -6,6 +6,7 @@ public class ApoyoPuntoVenta {
 
 
     public static void RecoDate(){
+        String mensaje = "";
 
         // Diccionario de las abreviaciones
         HashMap<String,String> IATA = new HashMap<>();
@@ -18,10 +19,10 @@ public class ApoyoPuntoVenta {
         BCN.add("BCN"); BCN.add("07:45"); BCN.add("18:55");BCN.add("90");
 
         ArrayList<String> MAD = new ArrayList<>();
-        BCN.add("MAD"); BCN.add("08:25"); BCN.add("21:00");BCN.add("60");
+        MAD.add("MAD"); MAD.add("08:25"); MAD.add("21:00");MAD.add("60");
 
         ArrayList<String> BIO = new ArrayList<>();
-        BCN.add("BIO"); BCN.add("08:55"); BCN.add("20:15");BCN.add("85");
+        BIO.add("BIO"); BIO.add("08:55"); BIO.add("20:15");BIO.add("85");
 
         ArrayList<ArrayList<String>> TODO = new ArrayList<>();
         TODO.add(BCN);TODO.add(MAD);TODO.add(BIO);
@@ -31,10 +32,21 @@ public class ApoyoPuntoVenta {
 
         Scanner input = new Scanner(System.in);
         System.out.print("Origen: ");
-        String Origen = input.nextLine();
+        String Ciudad = input.nextLine();
         System.out.print("Destino: ");
-        String Destino = input.nextLine();
+        String CiudadDest = input.nextLine();
 
+        String Origen = IATA.get(Ciudad);
+        String Destino = IATA.get(CiudadDest);
+
+        ArrayList<ArrayList<String>> VueCiudad = tempos.get(Origen);
+
+        for (ArrayList<String> vuelo : VueCiudad) {
+            if (vuelo.getFirst().equals(Destino)){
+                mensaje = Ciudad+ "(" + Origen + ")\t=>\t" + CiudadDest + "(" + Destino + ")" + vuelo.get(1) + ;
+            }
+        }
+        System.out.println(mensaje);
 
     }
 }
