@@ -1,3 +1,4 @@
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -24,9 +25,11 @@ public class ApoyoPuntoVenta {
         ArrayList<String> BIO = new ArrayList<>();
         BIO.add("BIO"); BIO.add("08:55"); BIO.add("20:15");BIO.add("85");
 
+        // Incrustacion de listas en lista principal
         ArrayList<ArrayList<String>> TODO = new ArrayList<>();
         TODO.add(BCN);TODO.add(MAD);TODO.add(BIO);
 
+        // Añadimos la megalista al diccionario
         HashMap<String, ArrayList<ArrayList<String>>> tempos = new HashMap<>();
         tempos.put("SVQ", TODO);
 
@@ -40,10 +43,11 @@ public class ApoyoPuntoVenta {
         String Destino = IATA.get(CiudadDest);
 
         ArrayList<ArrayList<String>> VueCiudad = tempos.get(Origen);
-
+        LocalTime horaSalida;
         for (ArrayList<String> vuelo : VueCiudad) {
             if (vuelo.getFirst().equals(Destino)){
-                mensaje = Ciudad+ "(" + Origen + ")\t=>\t" + CiudadDest + "(" + Destino + ")" + vuelo.get(1) + ;
+                horaSalida = LocalTime.parse(vuelo.get(1));
+                mensaje = Ciudad+ "(" + Origen + ")\t=>\t" + CiudadDest + "(" + Destino + ")\t" + horaSalida + "\t" + horaSalida.plusMinutes(Integer.parseInt(vuelo.get(3)));
             }
         }
         System.out.println(mensaje);
