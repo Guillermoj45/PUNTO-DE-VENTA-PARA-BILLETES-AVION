@@ -47,7 +47,7 @@ public class ApoyoPuntoVenta {
         for (ArrayList<String> vuelo : VueCiudad) {
             if (vuelo.getFirst().equals(Destino)){
                 horaSalida = LocalTime.parse(vuelo.get(1));
-                mensaje = Ciudad+ "(" + Origen + ")\t=>\t" + CiudadDest + "(" + Destino + ")\t" + horaSalida + "\t" + horaSalida.plusMinutes(Integer.parseInt(vuelo.get(3)));
+                mensaje = Ciudad+ "(" + Origen + ")  =>  " + CiudadDest + "(" + Destino + ")\t" + horaSalida + "\t" + horaSalida.plusMinutes(Integer.parseInt(vuelo.get(3)));
             }
         }
         System.out.println(mensaje);
