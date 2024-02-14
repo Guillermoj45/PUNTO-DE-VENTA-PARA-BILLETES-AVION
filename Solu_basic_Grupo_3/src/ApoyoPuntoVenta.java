@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,11 +45,17 @@ public class ApoyoPuntoVenta {
 
         ArrayList<ArrayList<String>> VueCiudad = tempos.get(Origen);
         LocalTime horaSalida;
+        LocalTime horaVuelta;
         for (ArrayList<String> vuelo : VueCiudad) {
             if (vuelo.getFirst().equals(Destino)){
                 horaSalida = LocalTime.parse(vuelo.get(1));
+                horaVuelta = LocalTime.parse(vuelo.get(2));
+                // Pendiente poner precios
+                float Precio = (int) (Math.random()*10);
                 mensaje = Ciudad+ "(" + Origen + ")  =>  " + CiudadDest + "(" + Destino + ")\t" + horaSalida + "\t" +
-                        horaSalida.plusMinutes(Integer.parseInt(vuelo.get(3)));
+                        horaSalida.plusMinutes(Integer.parseInt(vuelo.get(3))) + Precio +"\n";
+                mensaje = mensaje + Ciudad+ "(" + Origen + ")  =>  " + CiudadDest + "(" + Destino + ")\t" + horaVuelta + "\t" +
+                        horaVuelta.plusMinutes(Integer.parseInt(vuelo.get(3)));
             }
         }
         System.out.println(mensaje);
