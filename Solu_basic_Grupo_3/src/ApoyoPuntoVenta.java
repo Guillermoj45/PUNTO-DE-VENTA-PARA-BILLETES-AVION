@@ -47,7 +47,8 @@ public class ApoyoPuntoVenta {
                     cadena_meses += (meses[(primer_mes + i) % meses.length] + ", ");
                 }
 
-                System.out.println("\nEl resultado solicitado es:\n" + cadena_meses);
+
+                System.out.println("\nEl resultado solicitado es:\n" + cadena_meses.substring(0,cadena_meses.length()-2));
                 break;
             }
             else {
