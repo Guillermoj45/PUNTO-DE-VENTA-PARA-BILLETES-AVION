@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class ApoyoPuntoVenta {
 
@@ -7,20 +9,16 @@ public class ApoyoPuntoVenta {
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("\nHora de despegue (hh:mm): ");
-        String horaDespegue = scanner.next();
+        String hora_despegue = scanner.next();
         System.out.print("Duración (en minutos): ");
-        int duracionMin = scanner.nextInt();
+        int duracion_min = scanner.nextInt();
 
-        String[] horasDespegue = horaDespegue.split(":");
-        int hora = Integer.parseInt(horasDespegue[0]);
-        int minutos = Integer.parseInt(horasDespegue[1]);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime hora_despegue_fin = LocalTime.parse(hora_despegue, formatter);
 
-        int totalMin = hora * 60 + minutos + duracionMin;
+        LocalTime hora_llegada = hora_despegue_fin.plusMinutes(duracion_min);
 
-        int horaFin = totalMin / 60;
-        int minFin = totalMin % 60;
-
-        return String.format("%02d:%02d", horaFin, minFin);
+        return hora_llegada.format(formatter);
     }
 
     public static void gener_tabla_nombres() {
