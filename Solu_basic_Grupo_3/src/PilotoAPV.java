@@ -3,6 +3,8 @@ public class PilotoAPV {
         String hora_llegada = ApoyoPuntoVenta.gener_hora_llegada();
         System.out.println("\nEl resultado solicitado de la misma es: " + hora_llegada + "\n");
 
-        ApoyoPuntoVenta.gener_tabla_nombres();
+
+        String cadena_meses = ApoyoPuntoVenta.gener_tabla_nombres();
+        System.out.println("\nEl resultado solicitado es:\n" + cadena_meses);
     }
 }

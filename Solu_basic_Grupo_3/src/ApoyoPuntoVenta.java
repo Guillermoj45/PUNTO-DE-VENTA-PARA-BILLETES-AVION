@@ -21,7 +21,7 @@ public class ApoyoPuntoVenta {
         return hora_llegada.format(formatter);
     }
 
-    public static void gener_tabla_nombres() {
+    public static String gener_tabla_nombres() {
         System.out.println("Opción 3");
 
         String[] meses = {
@@ -29,6 +29,7 @@ public class ApoyoPuntoVenta {
                 "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
         };
 
+        String cadena_meses = "";
 
         while (true) {
             Scanner scanner = new Scanner(System.in);
@@ -39,19 +40,17 @@ public class ApoyoPuntoVenta {
             int primer_mes = num_mes - 1;
 
             if (primer_mes >= 0 && num_mes <= 12) {
-                String cadena_meses = "";
 
                 for (int i = 0; i < meses.length; i++) {
                     cadena_meses += (meses[(primer_mes + i) % meses.length] + ", ");
                 }
 
-
-                System.out.println("\nEl resultado solicitado es:\n" + cadena_meses.substring(0,cadena_meses.length()-2));
                 break;
             }
             else {
                 System.out.println("\nMes no válido.");
             }
         }
+        return cadena_meses.substring(0, cadena_meses.length() - 2);
     }
 }
