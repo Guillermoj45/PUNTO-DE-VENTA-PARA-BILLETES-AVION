@@ -1,13 +1,16 @@
+import java.text.NumberFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class ApoyoPuntoVenta {
 
 
-    public static void RecoDate(){
+    public static String RecoDate(){
         String mensaje = "";
+        System.out.println();
 
         // Diccionario de las abreviaciones
         HashMap<String,String> IATA = new HashMap<>();
@@ -38,6 +41,7 @@ public class ApoyoPuntoVenta {
         String Ciudad = input.nextLine();
         System.out.print("Destino: ");
         String CiudadDest = input.nextLine();
+        System.out.println();
 
         String Origen = IATA.get(Ciudad);
         String Destino = IATA.get(CiudadDest);
@@ -49,15 +53,16 @@ public class ApoyoPuntoVenta {
             if (vuelo.getFirst().equals(Destino)){
                 horaSalida = LocalTime.parse(vuelo.get(1));
                 horaVuelta = LocalTime.parse(vuelo.get(2));
-                // Pendiente poner precios
-                float Precio = (int) (Math.random()*10);
+                float Precio = (float) (Math.random()*25+35);
+                float Precio2 = (float) (Math.random()*25+35);
+                NumberFormat formato = NumberFormat.getCurrencyInstance(new Locale("es","ES"));
                 mensaje = Ciudad + "(" + Origen + ")  =>  " + CiudadDest + "(" + Destino + ")\t" + horaSalida + "\t" +
-                        horaSalida.plusMinutes(Integer.parseInt(vuelo.get(3))) + Precio +"\n";
-                mensaje = mensaje + Ciudad+ "(" + Origen + ")  =>  " + CiudadDest + "(" + Destino + ")\t" + horaVuelta + "\t" +
-                        horaVuelta.plusMinutes(Integer.parseInt(vuelo.get(3)));
+                        horaSalida.plusMinutes(Integer.parseInt(vuelo.get(3))) + "\t" + formato.format(Precio) +"\n";
+                mensaje += Ciudad+ "(" + Origen + ")  =>  " + CiudadDest + "(" + Destino + ")\t" + horaVuelta + "\t" +
+                        horaVuelta.plusMinutes(Integer.parseInt(vuelo.get(3)))+ "\t" + formato.format(Precio2);
             }
         }
-        System.out.println(mensaje);
+        return mensaje;
 
     }
 }
