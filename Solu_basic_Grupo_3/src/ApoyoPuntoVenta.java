@@ -52,8 +52,8 @@ public class ApoyoPuntoVenta {
 
         // Añadimos la megalista al diccionario
         HashMap<String, ArrayList<String> []> tempos = new HashMap<>();
-        tempos.put("SVQ",  Sevilla());
-        tempos.put("BCN",Barcelona());
+        tempos.put("SVQ", Sevilla());
+        tempos.put("BCN", Barcelona());
 
 
         Scanner input = new Scanner(System.in);
