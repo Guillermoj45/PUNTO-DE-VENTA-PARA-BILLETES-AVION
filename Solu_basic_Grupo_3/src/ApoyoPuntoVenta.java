@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class ApoyoPuntoVenta {
 
 
-    public static ArrayList<String> [] Sevilla(){
+    public static ArrayList[] Sevilla(){
         // Sevilla
         ArrayList<String> BCN = new ArrayList<>();
         BCN.add("BCN"); BCN.add("07:45"); BCN.add("18:55");BCN.add("90");
@@ -19,11 +19,10 @@ public class ApoyoPuntoVenta {
         ArrayList<String> BIO = new ArrayList<>();
         BIO.add("BIO"); BIO.add("08:55"); BIO.add("20:15");BIO.add("85");
 
-        // Incrustacion de listas en lista principal
-        ArrayList<String> []  TODO = new ArrayList[]{BCN,MAD,BIO};
-        return TODO;
+        // Devolvemos la lista de valores
+        return new ArrayList[]{BCN,MAD,BIO};
     }
-    public static ArrayList<String> [] Barcelona(){
+    public static ArrayList[] Barcelona(){
         // Barcelona
         ArrayList<String> BCN = new ArrayList<>();
         BCN.add("SVQ"); BCN.add("07:45"); BCN.add("18:55");BCN.add("90");
@@ -34,10 +33,8 @@ public class ApoyoPuntoVenta {
         ArrayList<String> BIO = new ArrayList<>();
         BIO.add("BIO"); BIO.add("08:55"); BIO.add("20:15");BIO.add("85");
 
-        // Incrustacion de listas en lista principal
-        ArrayList<String> []  TODO = new ArrayList[]{BCN,MAD,BIO};
-
-        return TODO;
+        // Devolvemos la lista de valores
+        return new ArrayList[]{BCN,MAD,BIO};
     }
 
     public static String RecoDate(){
@@ -71,7 +68,6 @@ public class ApoyoPuntoVenta {
         LocalTime horaVuelta;
 
         if (VueCiudad != null){
-            int Encontrado = 0;
             for (ArrayList<String> vuelo : VueCiudad) {
                 if (vuelo.getFirst().equals(Destino)){
                     horaSalida = LocalTime.parse(vuelo.get(1));
@@ -83,10 +79,9 @@ public class ApoyoPuntoVenta {
                             horaSalida.plusMinutes(Integer.parseInt(vuelo.get(3))) + "\t" + formato.format(Precio) +"\n";
                     mensaje += Ciudad+ "(" + Origen + ")  =>  " + CiudadDest + "(" + Destino + ")\t" + horaVuelta + "\t" +
                             horaVuelta.plusMinutes(Integer.parseInt(vuelo.get(3)))+ "\t" + formato.format(Precio2);
-                    Encontrado++;
                 }
             }
-            if (Encontrado == 0){
+            if (mensaje.isEmpty()){
                 mensaje = "La ciudad de destino no fue encontrada";
             }
         }
