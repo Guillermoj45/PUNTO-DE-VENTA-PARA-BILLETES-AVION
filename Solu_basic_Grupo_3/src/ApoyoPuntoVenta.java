@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class ApoyoPuntoVenta {
 
 
-    public static ArrayList[] Sevilla(){
+    public static ArrayList<String>[] Sevilla(){
         // Sevilla
         ArrayList<String> BCN = new ArrayList<>();
         BCN.add("BCN"); BCN.add("07:45"); BCN.add("18:55");BCN.add("90");
@@ -20,9 +20,9 @@ public class ApoyoPuntoVenta {
         BIO.add("BIO"); BIO.add("08:55"); BIO.add("20:15");BIO.add("85");
 
         // Devolvemos la lista de valores
-        return new ArrayList[]{BCN,MAD,BIO};
+        return new ArrayList[] {BCN,MAD,BIO};
     }
-    public static ArrayList[] Barcelona(){
+    public static ArrayList<String>[] Barcelona(){
         // Barcelona
         ArrayList<String> BCN = new ArrayList<>();
         BCN.add("SVQ"); BCN.add("07:45"); BCN.add("18:55");BCN.add("90");
@@ -34,7 +34,7 @@ public class ApoyoPuntoVenta {
         BIO.add("BIO"); BIO.add("08:55"); BIO.add("20:15");BIO.add("85");
 
         // Devolvemos la lista de valores
-        return new ArrayList[]{BCN,MAD,BIO};
+        return new ArrayList[] {BCN,MAD,BIO};
     }
 
     public static String RecoDate(){
