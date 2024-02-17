@@ -50,13 +50,11 @@ public class ApoyoPuntoVenta {
         IATA.put("Bilbao", "BIO"); IATA.put("Málaga", "AGP"); IATA.put("A Coruña", "LCG"); IATA.put("Santander", "SDR");
         IATA.put("Asturias", "OVD");
 
-        // Lista de ciudades con respectivas
-
-
         // Añadimos la megalista al diccionario
         HashMap<String, ArrayList<String> []> tempos = new HashMap<>();
         tempos.put("SVQ",  Sevilla());
         tempos.put("BCN",Barcelona());
+
 
         Scanner input = new Scanner(System.in);
         System.out.print("Origen: ");
@@ -71,19 +69,31 @@ public class ApoyoPuntoVenta {
         ArrayList<String> [] VueCiudad = tempos.get(Origen);
         LocalTime horaSalida;
         LocalTime horaVuelta;
-        for (ArrayList<String> vuelo : VueCiudad) {
-            if (vuelo.getFirst().equals(Destino)){
-                horaSalida = LocalTime.parse(vuelo.get(1));
-                horaVuelta = LocalTime.parse(vuelo.get(2));
-                float Precio = (float) (Math.random()*25+35);
-                float Precio2 = (float) (Math.random()*25+35);
-                NumberFormat formato = NumberFormat.getCurrencyInstance(new Locale("es","ES"));
-                mensaje = Ciudad + "(" + Origen + ")  =>  " + CiudadDest + "(" + Destino + ")\t" + horaSalida + "\t" +
-                        horaSalida.plusMinutes(Integer.parseInt(vuelo.get(3))) + "\t" + formato.format(Precio) +"\n";
-                mensaje += Ciudad+ "(" + Origen + ")  =>  " + CiudadDest + "(" + Destino + ")\t" + horaVuelta + "\t" +
-                        horaVuelta.plusMinutes(Integer.parseInt(vuelo.get(3)))+ "\t" + formato.format(Precio2);
+
+        if (VueCiudad != null){
+            int Encontrado = 0;
+            for (ArrayList<String> vuelo : VueCiudad) {
+                if (vuelo.getFirst().equals(Destino)){
+                    horaSalida = LocalTime.parse(vuelo.get(1));
+                    horaVuelta = LocalTime.parse(vuelo.get(2));
+                    float Precio = (float) (Math.random()*25+35);
+                    float Precio2 = (float) (Math.random()*25+35);
+                    NumberFormat formato = NumberFormat.getCurrencyInstance(new Locale("es","ES"));
+                    mensaje = Ciudad + "(" + Origen + ")  =>  " + CiudadDest + "(" + Destino + ")\t" + horaSalida + "\t" +
+                            horaSalida.plusMinutes(Integer.parseInt(vuelo.get(3))) + "\t" + formato.format(Precio) +"\n";
+                    mensaje += Ciudad+ "(" + Origen + ")  =>  " + CiudadDest + "(" + Destino + ")\t" + horaVuelta + "\t" +
+                            horaVuelta.plusMinutes(Integer.parseInt(vuelo.get(3)))+ "\t" + formato.format(Precio2);
+                    Encontrado++;
+                }
+            }
+            if (Encontrado == 0){
+                mensaje = "La ciudad de destino no fue encontrada";
             }
         }
+        else {
+            mensaje = "La ciudad de origen no a sido encontrada";
+        }
+
         return mensaje;
 
     }
