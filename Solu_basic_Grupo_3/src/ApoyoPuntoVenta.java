@@ -72,13 +72,18 @@ public class ApoyoPuntoVenta {
                 if (vuelo.getFirst().equals(Destino)){
                     horaSalida = LocalTime.parse(vuelo.get(1));
                     horaVuelta = LocalTime.parse(vuelo.get(2));
+
                     float Precio = (float) (Math.random()*25+35);
                     float Precio2 = (float) (Math.random()*25+35);
+
+                    LocalTime horaEsti =horaSalida.plusMinutes(Integer.parseInt(vuelo.get(3)));
+                    LocalTime horaEsti2 =horaVuelta.plusMinutes(Integer.parseInt(vuelo.get(3)));
+
                     NumberFormat formato = NumberFormat.getCurrencyInstance(new Locale("es","ES"));
                     mensaje = Ciudad + "(" + Origen + ")  =>  " + CiudadDest + "(" + Destino + ")\t" + horaSalida + "\t" +
-                            horaSalida.plusMinutes(Integer.parseInt(vuelo.get(3))) + "\t" + formato.format(Precio) +"\n";
+                             horaEsti + "\t" + formato.format(Precio) +"\n";
                     mensaje += Ciudad+ "(" + Origen + ")  =>  " + CiudadDest + "(" + Destino + ")\t" + horaVuelta + "\t" +
-                            horaVuelta.plusMinutes(Integer.parseInt(vuelo.get(3)))+ "\t" + formato.format(Precio2);
+                            horaEsti2 + "\t" + formato.format(Precio2);
                 }
             }
             if (mensaje.isEmpty()){
