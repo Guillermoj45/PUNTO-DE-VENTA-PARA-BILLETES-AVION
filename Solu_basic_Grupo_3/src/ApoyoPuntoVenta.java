@@ -8,6 +8,38 @@ import java.util.Scanner;
 public class ApoyoPuntoVenta {
 
 
+    public static ArrayList<String> [] Sevilla(){
+        // Sevilla
+        ArrayList<String> BCN = new ArrayList<>();
+        BCN.add("BCN"); BCN.add("07:45"); BCN.add("18:55");BCN.add("90");
+
+        ArrayList<String> MAD = new ArrayList<>();
+        MAD.add("MAD"); MAD.add("08:25"); MAD.add("21:00");MAD.add("60");
+
+        ArrayList<String> BIO = new ArrayList<>();
+        BIO.add("BIO"); BIO.add("08:55"); BIO.add("20:15");BIO.add("85");
+
+        // Incrustacion de listas en lista principal
+        ArrayList<String> []  TODO = new ArrayList[]{BCN,MAD,BIO};
+        return TODO;
+    }
+    public static ArrayList<String> [] Barcelona(){
+        // Barcelona
+        ArrayList<String> BCN = new ArrayList<>();
+        BCN.add("SVQ"); BCN.add("07:45"); BCN.add("18:55");BCN.add("90");
+
+        ArrayList<String> MAD = new ArrayList<>();
+        MAD.add("MAD"); MAD.add("07:35"); MAD.add("22:00");MAD.add("30");
+
+        ArrayList<String> BIO = new ArrayList<>();
+        BIO.add("BIO"); BIO.add("08:55"); BIO.add("20:15");BIO.add("85");
+
+        // Incrustacion de listas en lista principal
+        ArrayList<String> []  TODO = new ArrayList[]{BCN,MAD,BIO};
+
+        return TODO;
+    }
+
     public static String RecoDate(){
         String mensaje = "";
         System.out.println();
@@ -19,22 +51,12 @@ public class ApoyoPuntoVenta {
         IATA.put("Asturias", "OVD");
 
         // Lista de ciudades con respectivas
-        ArrayList<String> BCN = new ArrayList<>();
-        BCN.add("BCN"); BCN.add("07:45"); BCN.add("18:55");BCN.add("90");
 
-        ArrayList<String> MAD = new ArrayList<>();
-        MAD.add("MAD"); MAD.add("08:25"); MAD.add("21:00");MAD.add("60");
-
-        ArrayList<String> BIO = new ArrayList<>();
-        BIO.add("BIO"); BIO.add("08:55"); BIO.add("20:15");BIO.add("85");
-
-        // Incrustacion de listas en lista principal
-        ArrayList<ArrayList<String>> TODO = new ArrayList<>();
-        TODO.add(BCN);TODO.add(MAD);TODO.add(BIO);
 
         // Añadimos la megalista al diccionario
-        HashMap<String, ArrayList<ArrayList<String>>> tempos = new HashMap<>();
-        tempos.put("SVQ", TODO);
+        HashMap<String, ArrayList<String> []> tempos = new HashMap<>();
+        tempos.put("SVQ",  Sevilla());
+        tempos.put("BCN",Barcelona());
 
         Scanner input = new Scanner(System.in);
         System.out.print("Origen: ");
@@ -46,7 +68,7 @@ public class ApoyoPuntoVenta {
         String Origen = IATA.get(Ciudad);
         String Destino = IATA.get(CiudadDest);
 
-        ArrayList<ArrayList<String>> VueCiudad = tempos.get(Origen);
+        ArrayList<String> [] VueCiudad = tempos.get(Origen);
         LocalTime horaSalida;
         LocalTime horaVuelta;
         for (ArrayList<String> vuelo : VueCiudad) {
