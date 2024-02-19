@@ -6,7 +6,6 @@ import java.util.Locale;
 
 public class ApoyoPuntoVenta {
 
-
     public static ArrayList<String>[] Sevilla(){
         // Sevilla
         ArrayList<String> BCN = new ArrayList<>();
