@@ -21,6 +21,7 @@ public class ApoyoPuntoVenta {
         // Devolvemos la lista de valores
         return new ArrayList[] {BCN,MAD,BIO};
     }
+
     public static ArrayList<String>[] Barcelona(){
         // Barcelona
         ArrayList<String> BCN = new ArrayList<>();
