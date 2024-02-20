@@ -14,9 +14,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 
-public class ApoyoPuntoVent {
-
-}
+public class ApoyoPuntoVenta {
 
     public static ArrayList<String>[] Sevilla(){
         // Sevilla
@@ -95,13 +93,13 @@ public class ApoyoPuntoVent {
             }
         }
         else {
-            mensaje = "La ciudad de origen no a sido encontrada";
+            mensaje = "La ciudad de origen no ha sido encontrada";
         }
 
         return mensaje;
 
     }
-}
+
 
     public static String transformaFecha(String[] args) {
 //        System.out.println("Opción 1");
