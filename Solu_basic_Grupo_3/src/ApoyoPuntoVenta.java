@@ -2,20 +2,13 @@ import java.util.Scanner;
 import java.util.Locale;
 import java.time.LocalTime;
 import java.time.LocalDate;
-//import java.text.ParseException;
-//import java.util.Date;
-//import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
+import java.time.Month;
+import java.time.format.TextStyle;
 public class ApoyoPuntoVenta {
 
     public static String transformaFecha(String[] args) {
 //        System.out.println("Opción 1");
-
-        String[] meses = {
-                "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-                "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-        };
 
         //Recepción de valores como parámetros de ejecución
         String arg1 = args[0];
@@ -35,15 +28,9 @@ public class ApoyoPuntoVenta {
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("d-MMMM-yyyy", new Locale("es", "ES"));
         String fechaSalida = date.format(outputFormatter);
 
-//        String fechaBasica = String.join("/", arg1, arg2, arg3);
-//        SimpleDateFormat inputFormatter = new SimpleDateFormat("dd/MM/yyyy");
-//        Date date = inputFormatter.parse(fechaBasica);
-//        SimpleDateFormat outputFormatter = new SimpleDateFormat("d-MMMM-yyyy", new Locale("es", "ES"));
-//        String fechaSalida = outputFormatter.format(date);
 
         return fechaSalida;
     }
-
 
 
     public static String gener_hora_llegada() {
@@ -88,36 +75,33 @@ public class ApoyoPuntoVenta {
                 }
 
                 break;
-            }
-            else {
+            } else {
                 System.out.println("\nMes no válido.");
             }
         }
         return cadena_meses.substring(0, cadena_meses.length() - 2);
     }
 
-    public static int diaMaximoMes() {
+    public static int numeroDiasMes() {
+
+        //Introducir nombre del mes por teclado
         Scanner scanner = new Scanner(System.in);
         System.out.print("\nIntroduzca el mes en formato cadena: ");
-        String mesCadena = scanner.next();
+        String nombreMes = scanner.next();
 
-
-        HashMap<String, Integer> mesesDiasMaximos = new HashMap<>();
-        mesesDiasMaximos.put("Enero", 31);
-        mesesDiasMaximos.put("Febrero", 28);
-        mesesDiasMaximos.put("Marzo", 31);
-        mesesDiasMaximos.put("Abril", 30);
-        mesesDiasMaximos.put("Mayo", 31);
-        mesesDiasMaximos.put("Junio", 30);
-        mesesDiasMaximos.put("Julio", 31);
-        mesesDiasMaximos.put("Agosto", 31);
-        mesesDiasMaximos.put("Septiembre", 30);
-        mesesDiasMaximos.put("Octubre", 31);
-        mesesDiasMaximos.put("Noviembre", 30);
-        mesesDiasMaximos.put("Diciembre", 31);
-
-        int diaMaximo = mesesDiasMaximos.get(mesCadena);
-
-        return diaMaximo;
+        //Traducir el nombre del mes y hallar su longitud
+        int diasMes = 0;
+        boolean mesValido = false;
+        for (Month month : Month.values()) {
+            if (month.getDisplayName(TextStyle.FULL, Locale.forLanguageTag("es")).equalsIgnoreCase(nombreMes)) {
+                diasMes = month.length(false);
+                mesValido = true;
+                break;
+            }
+        }
+        if (mesValido = false) {
+            System.out.print("\nMes no válido.\n");
+        }
+        return diasMes;
     }
 }

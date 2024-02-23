@@ -30,13 +30,17 @@ public class PilotoAPV {
                     break;
                 case 4:
 //                    System.out.println("Opción 4");
-                    System.out.println("\nEl resultado solicitado es: " + ApoyoPuntoVenta.diaMaximoMes() + "\n");
+                    System.out.println("\nEl resultado solicitado es: " + ApoyoPuntoVenta.numeroDiasMes() +"\n");
                     break;
                 case 5:
                     System.out.println("Opción 5");
                     break;
                 case 6:
                     System.out.println("¡Hasta pronto!");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Por favor, elija una opción válida.");
+                    break;
             }
         }
         while (eleccion != 6);
