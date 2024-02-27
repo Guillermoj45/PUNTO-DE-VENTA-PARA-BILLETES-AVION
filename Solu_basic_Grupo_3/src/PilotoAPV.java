@@ -42,12 +42,12 @@ public class PilotoAPV {
                     System.out.println("\n");
                     break;
                 case 5:
-                    Scanner input = new Scanner(System.in);
                     System.out.print("\n");
+                    entrada.nextLine();
                     System.out.print("Origen: ");
-                    String Ciudad = input.nextLine();
+                    String Ciudad = entrada.nextLine();
                     System.out.print("Destino: ");
-                    String CiudadDest = input.nextLine();
+                    String CiudadDest = entrada.nextLine();
                     System.out.println(ApoyoPuntoVenta.RecoDate(Ciudad,CiudadDest));
                     System.out.println("\n");
                     break;
