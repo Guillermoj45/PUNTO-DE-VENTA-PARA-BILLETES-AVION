@@ -118,21 +118,69 @@ public class ApoyoPuntoVenta {
 
         // Diccionario de las abreviaciones
         HashMap<String,String> IATA = new HashMap<>();
-        IATA.put("Sevilla", "SVQ"); IATA.put("Madrid", "MAD"); IATA.put("Barcelona", "BCN"); IATA.put("Valencia", "VLC");
-        IATA.put("Bilbao", "BIO"); IATA.put("Málaga", "AGP"); IATA.put("A Coruña", "LCG"); IATA.put("Santander", "SDR");
-        IATA.put("Asturias", "OVD");
+
+        // Aereopuertos publicos
+        IATA.put("Alcobendas-Madrid", "MAD");
+        IATA.put("Albacete", "ABC");
+        IATA.put("Elche", "ALC");
+        IATA.put("El Alquián", "LEI");
+        IATA.put("Turias", "OVD");
+        IATA.put("Talavera la Real", "BJZ");
+        IATA.put("El Prat de Llobregat", "BCN");
+        IATA.put("Lujua", "BIO");
+        IATA.put("Burgos", "RGS");
+        IATA.put("Córdoba", "ODB");
+        IATA.put("Santa Fe", "GRX");
+        IATA.put("Aiguaviva", "GRO");
+        IATA.put("Telde", "LPA");
+        IATA.put("Puerto del Rosario", "FUE");
+        IATA.put("Culleredo", "LCG");
+        IATA.put("San Bartolomé", "ACE");
+        IATA.put("Monflorite", "HSK");
+        IATA.put("San José", "IBZ");
+        IATA.put("Jerez de la Frontera", "XRY");
+        IATA.put("La Virjen del Camino", "LEN");
+        IATA.put("Agoncillo", "RJL");
+        IATA.put("Cuatro Vientos-Madrid", "MCV");
+        IATA.put("Málaga", "AGP");
+        IATA.put("Melilla", "MLN");
+        IATA.put("Mahón", "MAH");
+        IATA.put("Corvera", "RMU");
+        IATA.put("Palma de Mallorca", "PMI");
+        IATA.put("Noaín", "PNA");
+        IATA.put("Reus", "REU");
+        IATA.put("Sabadell", "QSA");
+        IATA.put("Machacón", "SLM");
+        IATA.put("Fuenterrabía", "EAS");
+        IATA.put("Boqueijón", "SCQ");
+        IATA.put("Sevilla", "SVQ");
+        IATA.put("Camargo", "SDR");
+        IATA.put("Marrachí", "SBO");
+        IATA.put("San Cristóbal del La Laguna", "TFN");
+        IATA.put("Granadilla de Abona", "TFS");
+        IATA.put("Villa de Mazo", "SPC");
+        IATA.put("Alajeró", "GMZ");
+        IATA.put("Valverde", "VDE");
+        IATA.put("Manises", "VLC");
+        IATA.put("Villanubla", "VLL");
+        IATA.put("Vigo", "VGO");
+        IATA.put("Vitoria", "VIT");
+        IATA.put("Zaragoza", "ZAZ");
+
+        // Aereopuertos privados
+        IATA.put("Montferrer Castellbó", "LEU");
+        IATA.put("Benlloch", "CDT");
+        IATA.put("Cañada de Calatrava", "CQM");
+        IATA.put("Alguaire", "ILD");
+        IATA.put("Teruel", "TEV");
+
 
         // Añadimos la megalista al diccionario
         HashMap<String, ArrayList<String> []> tempos = new HashMap<>();
-        tempos.put("SVQ", CiuDate.Sevilla());
-        tempos.put("BCN", CiuDate.Barcelona());
-        tempos.put("MAD", CiuDate.Madrid());
-        tempos.put("VLC", CiuDate.Valencia());
-        tempos.put("BIO", CiuDate.Bilbao());
-        tempos.put("AGP", CiuDate.Malaga());
-        tempos.put("LCG", CiuDate.ACoruna());
-        tempos.put("SDR", CiuDate.Santander());
-        tempos.put("OVD", CiuDate.Asturias());
+        tempos.put("SVQ", CiuDate.San_Pablo());
+        tempos.put("MAD", CiuDate.Barajas());
+        tempos.put("ALC", CiuDate.El_Altet());
+
 
 
         String Origen = IATA.get(Ciudad);
