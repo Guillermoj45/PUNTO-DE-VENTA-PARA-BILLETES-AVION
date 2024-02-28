@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class CiuDate {
+
     // Vuelos Sevilla
     public static ArrayList<String>[] Sevilla(){
 
@@ -31,6 +32,7 @@ public class CiuDate {
         // Devolvemos la lista de valores
         return new ArrayList[] {BCN,MAD,BIO};
     }
+
     // Vuelos Barcelona
     public static ArrayList<String>[] Barcelona(){
 
@@ -61,6 +63,8 @@ public class CiuDate {
         // Devolvemos la lista de valores
         return new ArrayList[] {SVQ,MAD,BIO,VLC,AGP,LCG,SDR,OVD};
     }
+
+    // Vuelos Madrid
     public static ArrayList<String>[] Madrid(){
         ArrayList<String> SVQ = new ArrayList<>();
         SVQ.add("SVQ"); SVQ.add("07:45"); SVQ.add("18:55");SVQ.add("90");
@@ -90,6 +94,7 @@ public class CiuDate {
         return new ArrayList[] {SVQ,BCN,BIO,VLC,AGP,LCG,SDR,OVD};
     }
 
+    // Vuelos Valencia
     public static ArrayList<String>[] Valencia(){
         ArrayList<String> SVQ = new ArrayList<>();
         SVQ.add("SVQ"); SVQ.add("07:45"); SVQ.add("18:55");SVQ.add("90");
@@ -119,6 +124,7 @@ public class CiuDate {
         return new ArrayList[] {SVQ,BCN,MAD,BIO,AGP,LCG,SDR,OVD};
     }
 
+    // Vuelos Bilbao
     public static ArrayList<String>[] Bilbao(){
         ArrayList<String> SVQ = new ArrayList<>();
         SVQ.add("SVQ"); SVQ.add("07:45"); SVQ.add("18:55");SVQ.add("90");
@@ -148,6 +154,7 @@ public class CiuDate {
         return new ArrayList[] {SVQ,BCN,MAD,VLC,AGP,LCG,SDR,OVD};
     }
 
+    // Vuelos Malaga
     public static ArrayList<String>[] Malaga(){
         ArrayList<String> SVQ = new ArrayList<>();
         SVQ.add("SVQ"); SVQ.add("07:45"); SVQ.add("18:55");SVQ.add("90");
@@ -177,6 +184,7 @@ public class CiuDate {
         return new ArrayList[] {SVQ,BCN,MAD,VLC,BIO,LCG,SDR,OVD};
     }
 
+    // Vuelos A Coruña
     public static ArrayList<String>[] ACoruna(){
         ArrayList<String> SVQ = new ArrayList<>();
         SVQ.add("SVQ"); SVQ.add("07:45"); SVQ.add("18:55");SVQ.add("90");
@@ -205,6 +213,8 @@ public class CiuDate {
         // Devolvemos la lista de valores
         return new ArrayList[] {SVQ,BCN,MAD,VLC,BIO,AGP,SDR,OVD};
     }
+
+    // Vuelos Santander
     public static ArrayList<String>[] Santander(){
         ArrayList<String> SVQ = new ArrayList<>();
         SVQ.add("SVQ"); SVQ.add("07:45"); SVQ.add("18:55");SVQ.add("90");
@@ -234,6 +244,7 @@ public class CiuDate {
         return new ArrayList[] {SVQ,BCN,MAD,VLC,BIO,AGP,LCG,OVD};
     }
 
+    // Vuelos Asturias
     public static ArrayList<String>[] Asturias(){
         ArrayList<String> SVQ = new ArrayList<>();
         SVQ.add("SVQ"); SVQ.add("07:45"); SVQ.add("18:55");SVQ.add("90");
