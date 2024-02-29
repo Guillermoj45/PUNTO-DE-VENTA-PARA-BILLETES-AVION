@@ -1,3 +1,4 @@
+import java.text.DateFormat;
 import java.util.Scanner;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -100,7 +101,7 @@ public class ApoyoPuntoVenta {
         boolean mesValido = false;
         for (Month month : Month.values()) {
             if (month.getDisplayName(TextStyle.FULL, Locale.forLanguageTag("es")).equalsIgnoreCase(nombreMes)) {
-                diasMes = month.length(false);
+                diasMes = month.length(LocalDate.now().isLeapYear());
                 mesValido = true;
                 break;
             }
