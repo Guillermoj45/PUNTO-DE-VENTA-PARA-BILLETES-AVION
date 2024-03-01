@@ -8,9 +8,14 @@ public class UIPuntoDeVenta {
         frame.setSize(600, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        // frame.add(NombreMetodo());
+
+        frame.add(primerPanel());
     }
     // Parte Gráfica 1 Guillermo -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
+    private static JPanel primerPanel(){
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 0, 10, 10));
 
         JPanel titulo = new JPanel();
         JLabel texto = new JLabel("PUNTOS DE VENTA DE BILLETES");
