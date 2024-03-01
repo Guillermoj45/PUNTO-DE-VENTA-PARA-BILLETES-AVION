@@ -1,4 +1,3 @@
-import java.text.DateFormat;
 import java.util.Scanner;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -106,14 +105,14 @@ public class ApoyoPuntoVenta {
                 break;
             }
         }
-        if (mesValido = false) {
+        if (!mesValido) {
             System.out.print("\nMes no válido.\n");
         }
         return diasMes;
     }
 
     // Parte de Guille - Opción 5
-    public static String RecoDate(String Ciudad, String CiudadDest){
+    public static String recoDate(String Ciudad, String CiudadDest){
         String mensaje = "";
         System.out.println();
 

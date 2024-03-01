@@ -48,7 +48,7 @@ public class PilotoAPV {
                     String Ciudad = input.nextLine();
                     System.out.print("Destino: ");
                     String CiudadDest = input.nextLine();
-                    System.out.println(ApoyoPuntoVenta.RecoDate(Ciudad,CiudadDest));
+                    System.out.println(ApoyoPuntoVenta.recoDate(Ciudad,CiudadDest));
                     System.out.println("\n");
                     break;
                 case 6:
