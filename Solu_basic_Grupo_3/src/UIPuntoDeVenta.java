@@ -23,16 +23,46 @@ public class UIPuntoDeVenta {
         titulo.add(texto);
         return titulo;
     }
+
+    private static JPanel panelCentral(){
+        JPanel panelCentral = new JPanel();
+        panelCentral.setLayout(new GridLayout(1, 2, 0, 0));
+        panelCentral.add(panelIzquierdo());
+        return panelCentral;
+    }
+
+    private static JPanel panelIzquierdo(){
+        JPanel panelIzquierdo = new JPanel();
+        panelIzquierdo.add(modalidad());
+        return panelIzquierdo;
+    }
+
+    private static JPanel modalidad(){
+        JPanel panelModalidad = new JPanel();
+        panelModalidad.setLayout(new GridLayout(0, 2, 0, 0));
+
+        JRadioButton ida = new JRadioButton("Solo Ida");
+        JRadioButton idaVuelta = new JRadioButton("Ida/Vuelta");
+        ButtonGroup grupo = new ButtonGroup();
+        grupo.add(ida);
+        grupo.add(idaVuelta);
+
+        panelModalidad.add(ida);
+        panelModalidad.add(idaVuelta);
+        return panelModalidad;
+    }
     private static JPanel primerPanel(){
         JPanel granPanel = new JPanel();
-        // añadimos margenes
-        granPanel.setBorder(new EmptyBorder(10, 40, 10, 40));
 
-        JPanel panel1 = new JPanel();
-        panel1.setBorder(BorderFactory.createLoweredBevelBorder());
-        granPanel.add(panel1);
+        granPanel.setBorder(new EmptyBorder(10, 0, 10, 0));
 
-        panel1.add(tituloPanel());
+        JPanel granPanelBorde = new JPanel();
+        granPanelBorde.setBorder(BorderFactory.createLoweredBevelBorder());
+        granPanel.add(granPanelBorde);
+
+        granPanelBorde.setLayout(new BorderLayout(5,5));
+        granPanelBorde.add(tituloPanel(), BorderLayout.NORTH);
+        granPanelBorde.add(panelCentral(), BorderLayout.CENTER);
         return granPanel;
     }
 
