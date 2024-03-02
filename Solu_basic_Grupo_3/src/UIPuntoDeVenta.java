@@ -44,11 +44,12 @@ public class UIPuntoDeVenta {
         JRadioButton ida = new JRadioButton("Solo Ida");
         JRadioButton idaVuelta = new JRadioButton("Ida/Vuelta");
         ButtonGroup grupo = new ButtonGroup();
-        grupo.add(ida);
-        grupo.add(idaVuelta);
 
         panelModalidad.add(ida);
         panelModalidad.add(idaVuelta);
+
+        grupo.add(ida);
+        grupo.add(idaVuelta);
         return panelModalidad;
     }
     private static JPanel primerPanel(){
