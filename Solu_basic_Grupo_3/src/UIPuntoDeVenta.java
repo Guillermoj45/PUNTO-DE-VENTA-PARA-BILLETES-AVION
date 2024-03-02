@@ -14,7 +14,7 @@ public class UIPuntoDeVenta {
 
         frame.add(primerPanel());
         frame.setVisible(true);
-        // frame.pack();
+        frame.pack();
     }
     // Parte Gráfica 1 Guillermo -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
     private static JPanel tituloPanel(){
@@ -31,12 +31,13 @@ public class UIPuntoDeVenta {
         JPanel panelCentral = new JPanel();
         panelCentral.setLayout(new GridLayout(1, 2, 0, 0));
         panelCentral.add(panelIzquierdo());
+        panelCentral.add(panelDerecho());
         return panelCentral;
     }
 
     private static JPanel panelIzquierdo(){
         JPanel panelIzquierdo = new JPanel();
-panelIzquierdo.setLayout(new GridLayout(3, 1, 0, 0));
+        panelIzquierdo.setLayout(new GridLayout(3, 1, 0, 0));
         panelIzquierdo.add(modalidad());
         panelIzquierdo.add(panelFechas("Fecha de Ida"));
         panelIzquierdo.add(panelFechas("Fecha Vuelta"));
@@ -53,7 +54,7 @@ panelIzquierdo.setLayout(new GridLayout(3, 1, 0, 0));
 
         panelModalidad.add(ida);
         panelModalidad.add(idaVuelta);
-        // dibujamos un borde alrededor del panel con el titulo "Modalidad" centrado
+        // dibujamos un borde alrededor del panel con el título "Modalidad" centrado
         TitledBorder centerBorder = BorderFactory.createTitledBorder("Modalidad");
         centerBorder.setTitleJustification(TitledBorder.CENTER);
         panelModalidad.setBorder(centerBorder);
@@ -87,6 +88,13 @@ panelIzquierdo.setLayout(new GridLayout(3, 1, 0, 0));
         meses.getValue();
         fechaIda.setBorder(BorderFactory.createTitledBorder(titulo));
         return fechaIda;
+    }
+
+    private static JPanel panelDerecho(){
+        JPanel trayecto = new JPanel();
+        trayecto.setLayout(new GridLayout(3, 1, 0, 0));
+
+        return trayecto;
     }
     private static JPanel primerPanel(){
         JPanel granPanel = new JPanel();
