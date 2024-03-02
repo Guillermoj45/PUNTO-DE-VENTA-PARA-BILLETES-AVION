@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.util.HashMap;
 
 
 public class UIPuntoDeVenta {
@@ -77,14 +78,14 @@ public class UIPuntoDeVenta {
 
         meses.setPreferredSize(new Dimension(90, (int) meses.getPreferredSize().getHeight()));
 
-        JSpinner años = new JSpinner(new SpinnerNumberModel(2022, 2000, 2030, 1));
+        JSpinner anios = new JSpinner(new SpinnerNumberModel(2022, 2000, 2030, 1));
 
         fechaIda.add(new JLabel("Día"));
         fechaIda.add(dias);
         fechaIda.add(new JLabel("Mes"));
         fechaIda.add(meses);
         fechaIda.add(new JLabel("Año"));
-        fechaIda.add(años);
+        fechaIda.add(anios);
         meses.getValue();
         fechaIda.setBorder(BorderFactory.createTitledBorder(titulo));
         return fechaIda;
@@ -93,7 +94,18 @@ public class UIPuntoDeVenta {
     private static JPanel panelDerecho(){
         JPanel trayecto = new JPanel();
         trayecto.setLayout(new GridLayout(3, 1, 0, 0));
+        TitledBorder centerBorder = BorderFactory.createTitledBorder("Trayecto");
+        centerBorder.setTitleJustification(TitledBorder.CENTER);
+        trayecto.setBorder(centerBorder);
 
+        HashMap <String,String> sitios = ApoyoPuntoVenta.lugares();
+
+        JComboBox <String> trayectos = new JComboBox<>();
+
+        trayectos.setModel(new DefaultComboBoxModel<>(sitios.keySet().toArray(new String[0])));
+
+        trayectos.add(new JLabel("Origen"));
+        trayecto.add(trayectos);
         return trayecto;
     }
     private static JPanel primerPanel(){

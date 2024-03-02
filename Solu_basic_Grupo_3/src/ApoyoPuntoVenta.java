@@ -112,15 +112,19 @@ public class ApoyoPuntoVenta {
     }
 
     // Parte de Guille - Opción 5
+    public static HashMap<String,String> lugares(){
+        HashMap<String,String> IATA = new HashMap<>();
+        IATA.put("Sevilla", "SVQ"); IATA.put("Madrid", "MAD"); IATA.put("Barcelona", "BCN"); IATA.put("Valencia", "VLC");
+        IATA.put("Bilbao", "BIO"); IATA.put("Málaga", "AGP"); IATA.put("A Coruña", "LCG"); IATA.put("Santander", "SDR");
+        IATA.put("Asturias", "OVD");
+        return IATA;
+    }
     public static String recoDate(String Ciudad, String CiudadDest){
         String mensaje = "";
         System.out.println();
 
         // Diccionario de las abreviaciones
-        HashMap<String,String> IATA = new HashMap<>();
-        IATA.put("Sevilla", "SVQ"); IATA.put("Madrid", "MAD"); IATA.put("Barcelona", "BCN"); IATA.put("Valencia", "VLC");
-        IATA.put("Bilbao", "BIO"); IATA.put("Málaga", "AGP"); IATA.put("A Coruña", "LCG"); IATA.put("Santander", "SDR");
-        IATA.put("Asturias", "OVD");
+        HashMap<String,String> IATA = lugares();
 
         // Añadimos la megalista al diccionario
         HashMap<String, ArrayList<String> []> tempos = new HashMap<>();
