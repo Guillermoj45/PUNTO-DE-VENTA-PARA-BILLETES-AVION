@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 
 
@@ -9,9 +10,11 @@ public class UIPuntoDeVenta {
         frame.setSize(600, 700);
         frame.setLayout(new GridLayout(3, 1,0,0));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+
 
         frame.add(primerPanel());
+        frame.setVisible(true);
+        // frame.pack();
     }
     // Parte Gráfica 1 Guillermo -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
     private static JPanel tituloPanel(){
@@ -47,11 +50,22 @@ public class UIPuntoDeVenta {
 
         panelModalidad.add(ida);
         panelModalidad.add(idaVuelta);
+        // dibujamos un borde alrededor del panel con el titulo "Modalidad" centrado
+        TitledBorder centerBorder = BorderFactory.createTitledBorder("Modalidad");
+        centerBorder.setTitleJustification(TitledBorder.CENTER);
+        panelModalidad.setBorder(centerBorder);
 
         grupo.add(ida);
         grupo.add(idaVuelta);
+
         return panelModalidad;
     }
+
+//    private static JPanel panelDerecho(){
+//        JPanel FechaIda = new JPanel();
+//
+//       return panelDerecho;
+//    }
     private static JPanel primerPanel(){
         JPanel granPanel = new JPanel();
 
