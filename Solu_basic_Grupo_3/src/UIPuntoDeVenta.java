@@ -36,7 +36,10 @@ public class UIPuntoDeVenta {
 
     private static JPanel panelIzquierdo(){
         JPanel panelIzquierdo = new JPanel();
+panelIzquierdo.setLayout(new GridLayout(3, 1, 0, 0));
         panelIzquierdo.add(modalidad());
+        panelIzquierdo.add(panelFechas("Fecha de Ida"));
+        panelIzquierdo.add(panelFechas("Fecha Vuelta"));
         return panelIzquierdo;
     }
 
@@ -61,11 +64,30 @@ public class UIPuntoDeVenta {
         return panelModalidad;
     }
 
-//    private static JPanel panelDerecho(){
-//        JPanel FechaIda = new JPanel();
-//
-//       return panelDerecho;
-//    }
+    private static JPanel panelFechas(String titulo){
+        JPanel fechaIda = new JPanel();
+        JSpinner dias = new JSpinner(new SpinnerNumberModel(1, 1, 31, 1));
+        dias.setBounds(70, 130, 50, 40);
+
+        String[] nombreMes = { "Enero", "Febrero", "Marzo",
+                "Abril", "Mayo", "Junio", "Julio", "Agosto",
+                "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+        JSpinner meses = new JSpinner(new SpinnerListModel(nombreMes));
+
+        meses.setPreferredSize(new Dimension(90, (int) meses.getPreferredSize().getHeight()));
+
+        JSpinner años = new JSpinner(new SpinnerNumberModel(2022, 2000, 2030, 1));
+
+        fechaIda.add(new JLabel("Día"));
+        fechaIda.add(dias);
+        fechaIda.add(new JLabel("Mes"));
+        fechaIda.add(meses);
+        fechaIda.add(new JLabel("Año"));
+        fechaIda.add(años);
+        meses.getValue();
+        fechaIda.setBorder(BorderFactory.createTitledBorder(titulo));
+        return fechaIda;
+    }
     private static JPanel primerPanel(){
         JPanel granPanel = new JPanel();
 
