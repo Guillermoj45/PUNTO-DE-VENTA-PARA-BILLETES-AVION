@@ -23,6 +23,7 @@ public class UIPuntoDeVenta {
 
 
     // Parte Gráfica 1 Guillermo -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
+   // TODO: sacar el mensaje mostrando toda la información
     private static JPanel tituloPanel(){
         JPanel titulo = new JPanel();
         JLabel texto = new JLabel("PUNTOS DE VENTA DE BILLETES");
@@ -53,19 +54,35 @@ public class UIPuntoDeVenta {
         panelIzquierdo.add(panelFechas("Fecha de Ida"));
         panelIzquierdo.add(panelFechas("Fecha Vuelta"));
 
-        JPanel hola = (JPanel) panelIzquierdo.getComponent(0);
-        JRadioButton ida = (JRadioButton) hola.getComponent(0);
-        JRadioButton vuelta = (JRadioButton) hola.getComponent(1);
+        // hacemos que sea el mismo valor en ida y vuelta
+        JPanel fecha = (JPanel) panelIzquierdo.getComponent(1);
+        JSpinner dias = (JSpinner) fecha.getComponent(1);
+        JSpinner diaVuelta = (JSpinner) ((JPanel) panelIzquierdo.getComponent(2)).getComponent(1);
+
+        dias.addChangeListener(e->{
+            int dia = (int) dias.getValue();
+            System.out.println(dia);
+            diaVuelta.setValue(dia);
+        });
+
+        // Declaramos las variables que luego usaremos para bloquear y desbloquear los paneles
+        JPanel panel = (JPanel) panelIzquierdo.getComponent(0);
+        JRadioButton ida = (JRadioButton) panel.getComponent(0);
+        JRadioButton vuelta = (JRadioButton) panel.getComponent(1);
 
         // hacemos que el botón de ida esté seleccionado por defecto
         vuelta.setSelected(true);
 
+
+
+        // bloqueamos el panel de vuelta
         ida.addActionListener(e -> {
             if (ida.isSelected()) {
                 bloqueoComponente(panelIzquierdo.getComponent(2));
             }
         });
 
+        // desbloqueamos el panel de vuelta
         vuelta.addActionListener(e -> {
             if (vuelta.isSelected()) {
                 desbloqueoComponente(panelIzquierdo.getComponent(2));
@@ -153,7 +170,7 @@ public class UIPuntoDeVenta {
             JComboBox<?> ida = (JComboBox<?>) e.getSource();
             String lugar = (String) ida.getSelectedItem();
             trayecto.remove(1);
-            trayecto.add(sustituirPanel("Destino: ", lugar), 1);
+            trayecto.add(sustituirPanel(lugar), 1);
             trayecto.revalidate();
         });
 
@@ -164,7 +181,7 @@ public class UIPuntoDeVenta {
         return trayecto;
     }
 
-    private static JPanel sustituirPanel(String texto, String lugar){
+    private static JPanel sustituirPanel(String lugar){
         JPanel datos = new JPanel();
         JComboBox <String> origen = new JComboBox<>();
         HashMap <String,String> sitios = ApoyoPuntoVenta.lugares();
@@ -172,7 +189,7 @@ public class UIPuntoDeVenta {
         for (String sitio : sitios.keySet()) {
             origen.addItem(sitio);
         }
-        datos.add(new JLabel(texto));
+        datos.add(new JLabel("Destino: "));
         datos.add(origen);
         return datos;
     }
