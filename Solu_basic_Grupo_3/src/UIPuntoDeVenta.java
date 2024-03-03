@@ -2,9 +2,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
-import java.util.Objects;
+
 
 
 public class UIPuntoDeVenta {
