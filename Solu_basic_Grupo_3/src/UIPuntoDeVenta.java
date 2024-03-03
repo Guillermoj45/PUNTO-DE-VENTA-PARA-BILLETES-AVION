@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 
@@ -57,12 +58,25 @@ public class UIPuntoDeVenta {
         // hacemos que sea el mismo valor en ida y vuelta
         JPanel fecha = (JPanel) panelIzquierdo.getComponent(1);
         JSpinner dias = (JSpinner) fecha.getComponent(1);
-        JSpinner diaVuelta = (JSpinner) ((JPanel) panelIzquierdo.getComponent(2)).getComponent(1);
+        JSpinner mes = (JSpinner) fecha.getComponent(3);
+        JSpinner anio = (JSpinner) fecha.getComponent(5);
 
-        // Creamos una interfaz funcionar con expression lambda para que el valor de los días de ida y vuelta sean iguales
+        JSpinner diaVuelta = (JSpinner) ((JPanel) panelIzquierdo.getComponent(2)).getComponent(1);
+        JSpinner mesVuelta = (JSpinner) ((JPanel) panelIzquierdo.getComponent(2)).getComponent(3);
+        JSpinner anioVuelta = (JSpinner) ((JPanel) panelIzquierdo.getComponent(2)).getComponent(5);
+
+        // Creamos una interfaz funcionar con expression lambda para que las fechas de ida y vuelta sean iguales
         dias.addChangeListener(e->{
             int dia = (int) dias.getValue();
             diaVuelta.setValue(dia);
+        });
+        mes.addChangeListener(e->{
+            String mes1 = (String) mes.getValue();
+            mesVuelta.setValue(mes1);
+        });
+        anio.addChangeListener(e->{
+            int anio1 = (int) anio.getValue();
+            anioVuelta.setValue(anio1);
         });
 
         // Declaramos las variables que luego usaremos para bloquear y desbloquear los paneles
@@ -126,7 +140,7 @@ public class UIPuntoDeVenta {
 
     private static JPanel panelFechas(String titulo){
         JPanel fechaIda = new JPanel();
-        JSpinner dias = new JSpinner(new SpinnerNumberModel(1, 1, 31, 1));
+        JSpinner dias = new JSpinner(new SpinnerNumberModel(Integer.parseInt(String.valueOf(LocalDate.now().getDayOfMonth())), 1, 31, 1));
         dias.setBounds(70, 130, 50, 40);
         // Hacemos que días no se pueda cambiar manualmente
         dias.setEditor(new JSpinner.DefaultEditor(dias));
@@ -137,9 +151,13 @@ public class UIPuntoDeVenta {
         JSpinner meses = new JSpinner(new SpinnerListModel(nombreMes));
         meses.setEditor(new JSpinner.DefaultEditor(meses));
 
+        // Para obtener el mes actual y seleccionarlo por defecto
+        meses.setValue(nombreMes[LocalDate.now().getMonthValue() - 1]);
+
+        // Hacemos que el tamaño del JSpinner sea fijo
         meses.setPreferredSize(new Dimension(90, (int) meses.getPreferredSize().getHeight()));
 
-        JSpinner anios = new JSpinner(new SpinnerNumberModel(2022, 2000, 2030, 1));
+        JSpinner anios = new JSpinner(new SpinnerNumberModel(Integer.parseInt(String.valueOf(LocalDate.now().getYear())), 2002, 2030, 1));
         anios.setEditor(new JSpinner.DefaultEditor(anios));
 
         fechaIda.add(new JLabel("Día"));
