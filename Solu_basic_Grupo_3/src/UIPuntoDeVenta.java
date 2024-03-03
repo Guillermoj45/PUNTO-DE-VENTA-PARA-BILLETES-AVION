@@ -59,9 +59,9 @@ public class UIPuntoDeVenta {
         JSpinner dias = (JSpinner) fecha.getComponent(1);
         JSpinner diaVuelta = (JSpinner) ((JPanel) panelIzquierdo.getComponent(2)).getComponent(1);
 
+        // Creamos una interfaz funcionar con expression lambda para que el valor de los días de ida y vuelta sean iguales
         dias.addChangeListener(e->{
             int dia = (int) dias.getValue();
-            System.out.println(dia);
             diaVuelta.setValue(dia);
         });
 
