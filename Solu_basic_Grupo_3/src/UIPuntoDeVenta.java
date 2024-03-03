@@ -16,6 +16,7 @@ public class UIPuntoDeVenta {
         frame.add(primerPanel());
         frame.setVisible(true);
         frame.pack();
+        frame.setResizable(false);
     }
     // Parte Gráfica 1 Guillermo -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
     private static JPanel tituloPanel(){
@@ -32,7 +33,7 @@ public class UIPuntoDeVenta {
         JPanel panelCentral = new JPanel();
         panelCentral.setLayout(new GridLayout(1, 2, 0, 0));
         panelCentral.add(panelIzquierdo());
-        panelCentral.add(panelDerecho());
+        panelCentral.add(trayectos());
         return panelCentral;
     }
 
@@ -47,12 +48,11 @@ public class UIPuntoDeVenta {
 
     private static JPanel modalidad(){
         JPanel panelModalidad = new JPanel();
-        panelModalidad.setLayout(new GridLayout(0, 2, 0, 0));
 
         JRadioButton ida = new JRadioButton("Solo Ida");
         JRadioButton idaVuelta = new JRadioButton("Ida/Vuelta");
         ButtonGroup grupo = new ButtonGroup();
-
+        ida.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
         panelModalidad.add(ida);
         panelModalidad.add(idaVuelta);
         // dibujamos un borde alrededor del panel con el título "Modalidad" centrado
@@ -91,23 +91,47 @@ public class UIPuntoDeVenta {
         return fechaIda;
     }
 
-    private static JPanel panelDerecho(){
+    private static JPanel trayectos(){
         JPanel trayecto = new JPanel();
         trayecto.setLayout(new GridLayout(3, 1, 0, 0));
         TitledBorder centerBorder = BorderFactory.createTitledBorder("Trayecto");
         centerBorder.setTitleJustification(TitledBorder.CENTER);
         trayecto.setBorder(centerBorder);
 
-        HashMap <String,String> sitios = ApoyoPuntoVenta.lugares();
+        JPanel origen = jBoxLugares("Origen: ");
+        JPanel destino = jBoxLugares("Destino: ");
+        JPanel personas = Personas();
 
-        JComboBox <String> trayectos = new JComboBox<>();
 
-        trayectos.setModel(new DefaultComboBoxModel<>(sitios.keySet().toArray(new String[0])));
-
-        trayectos.add(new JLabel("Origen"));
-        trayecto.add(trayectos);
+        origen.setBounds(50, 50, 90, 20);
+        trayecto.add(origen);
+        trayecto.add(destino);
+        trayecto.add(personas);
         return trayecto;
     }
+
+    private static JPanel Personas(){
+        JPanel personas = new JPanel();
+        personas.add(new JLabel("Nº personas: "));
+        JSpinner numPersonas = new JSpinner(new SpinnerNumberModel(1, 1, 10, 1));
+        personas.add(numPersonas);
+        JButton boton = new JButton("Buscar");
+        personas.add(boton);
+        return personas;
+    }
+
+    private static JPanel jBoxLugares(String texto){
+        JPanel datos = new JPanel();
+        JComboBox <String> origen = new JComboBox<>();
+        HashMap <String,String> sitios = ApoyoPuntoVenta.lugares();
+        for (String sitio : sitios.keySet()) {
+            origen.addItem(sitio);
+        }
+        datos.add(new JLabel(texto));
+        datos.add(origen);
+        return datos;
+    }
+
     private static JPanel primerPanel(){
         JPanel granPanel = new JPanel();
 
