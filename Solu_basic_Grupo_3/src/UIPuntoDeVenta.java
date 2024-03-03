@@ -180,19 +180,6 @@ public class UIPuntoDeVenta {
         return trayecto;
     }
 
-    private static JPanel sustituirPanel(String lugar){
-        JPanel datos = new JPanel();
-        JComboBox <String> origen = new JComboBox<>();
-        HashMap <String,String> sitios = ApoyoPuntoVenta.lugares();
-        sitios.remove(lugar);
-        for (String sitio : sitios.keySet()) {
-            origen.addItem(sitio);
-        }
-        datos.add(new JLabel("Destino: "));
-        datos.add(origen);
-        return datos;
-    }
-
     private static JPanel Personas(){
         JPanel personas = new JPanel();
         personas.add(new JLabel("Nº personas: "));
@@ -204,10 +191,27 @@ public class UIPuntoDeVenta {
         return personas;
     }
 
+    private static JPanel sustituirPanel(String lugar){
+        JPanel datos = new JPanel();
+        JComboBox <String> origen = new JComboBox<>();
+        HashMap <String,String> sitios = ApoyoPuntoVenta.lugares();
+        origen.addItem("-------------");
+
+        sitios.remove(lugar);
+        for (String sitio : sitios.keySet()) {
+            origen.addItem(sitio);
+        }
+        datos.add(new JLabel("Destino: "));
+        datos.add(origen);
+        return datos;
+    }
+
     private static JPanel jBoxLugares(String texto){
         JPanel datos = new JPanel();
         JComboBox <String> origen = new JComboBox<>();
         HashMap <String,String> sitios = ApoyoPuntoVenta.lugares();
+        origen.addItem("-------------");
+
         for (String sitio : sitios.keySet()) {
             origen.addItem(sitio);
         }
