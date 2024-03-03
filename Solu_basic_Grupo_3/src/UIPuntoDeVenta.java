@@ -3,8 +3,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.HashMap;
-
+import java.util.Locale;
 
 
 public class UIPuntoDeVenta {
@@ -163,6 +166,17 @@ public class UIPuntoDeVenta {
 
         JSpinner anios = new JSpinner(new SpinnerNumberModel(Integer.parseInt(String.valueOf(LocalDate.now().getYear())), 2002, 2030, 1));
         anios.setEditor(new JSpinner.DefaultEditor(anios));
+
+        meses.addChangeListener(e -> {
+                String mes = (String) meses.getValue();
+                int diasMes = 0;
+                for (Month month : Month.values()) {
+                    if (month.getDisplayName(TextStyle.FULL, Locale.forLanguageTag("es")).equalsIgnoreCase(mes)) {
+                        diasMes = month.length(LocalDate.parse("12/2/" + anios.getValue(), DateTimeFormatter.ofPattern("dd/M/yyyy")).isLeapYear());
+                        dias.setModel(new SpinnerNumberModel(1, 1, diasMes, 1));
+                    }
+                }
+        });
 
         fechaIda.add(new JLabel("Día"));
         fechaIda.add(dias);
