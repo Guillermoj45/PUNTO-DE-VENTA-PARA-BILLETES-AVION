@@ -141,13 +141,17 @@ public class UIPuntoDeVenta {
     private static JPanel panelFechas(String titulo){
         JPanel fechaIda = new JPanel();
         JSpinner dias = new JSpinner(new SpinnerNumberModel(Integer.parseInt(String.valueOf(LocalDate.now().getDayOfMonth())), 1, 31, 1));
-        dias.setBounds(70, 130, 50, 40);
+
+        dias.setPreferredSize(new Dimension(50, (int) dias.getPreferredSize().getHeight()));
+
         // Hacemos que días no se pueda cambiar manualmente
         dias.setEditor(new JSpinner.DefaultEditor(dias));
 
         String[] nombreMes = { "Enero", "Febrero", "Marzo",
                 "Abril", "Mayo", "Junio", "Julio", "Agosto",
                 "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+
+        // Introducimos los meses en el JSpinner
         JSpinner meses = new JSpinner(new SpinnerListModel(nombreMes));
         meses.setEditor(new JSpinner.DefaultEditor(meses));
 
