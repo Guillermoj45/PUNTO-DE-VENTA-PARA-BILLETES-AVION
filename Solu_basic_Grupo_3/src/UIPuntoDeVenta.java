@@ -2,7 +2,9 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.Objects;
 
 
 public class UIPuntoDeVenta {
@@ -39,11 +41,36 @@ public class UIPuntoDeVenta {
 
     private static JPanel panelIzquierdo(){
         JPanel panelIzquierdo = new JPanel();
-        panelIzquierdo.setLayout(new GridLayout(3, 1, 0, 0));
+        panelIzquierdo.setLayout (new GridLayout(3, 1, 0, 0));
         panelIzquierdo.add(modalidad());
         panelIzquierdo.add(panelFechas("Fecha de Ida"));
         panelIzquierdo.add(panelFechas("Fecha Vuelta"));
+        JPanel hola = (JPanel) panelIzquierdo.getComponent(0);
+        JRadioButton ida = (JRadioButton) hola.getComponent(0);
+        JRadioButton vuelta = (JRadioButton) hola.getComponent(1);
+        ida.addActionListener(e -> {
+            if (ida.isSelected()) {
+                bloqueoComponente(panelIzquierdo.getComponent(2));
+            }
+        });
+        vuelta.addActionListener(e -> {
+            if (vuelta.isSelected()) {
+                desbloqueoComponente(panelIzquierdo.getComponent(2));
+            }
+        });
+
         return panelIzquierdo;
+    }
+
+    private static void bloqueoComponente(Component componente){
+        for (Component c : ((Container) componente).getComponents()) {
+            c.setEnabled(false);
+        }
+    }
+    private static void desbloqueoComponente(Component componente){
+        for (Component c : ((Container) componente).getComponents()) {
+            c.setEnabled(true);
+        }
     }
 
     private static JPanel modalidad(){
@@ -70,15 +97,19 @@ public class UIPuntoDeVenta {
         JPanel fechaIda = new JPanel();
         JSpinner dias = new JSpinner(new SpinnerNumberModel(1, 1, 31, 1));
         dias.setBounds(70, 130, 50, 40);
+        // Hacemos que dias no se pueda cambiar manualmente
+        dias.setEditor(new JSpinner.DefaultEditor(dias));
 
         String[] nombreMes = { "Enero", "Febrero", "Marzo",
                 "Abril", "Mayo", "Junio", "Julio", "Agosto",
                 "Septiembre", "Octubre", "Noviembre", "Diciembre"};
         JSpinner meses = new JSpinner(new SpinnerListModel(nombreMes));
+        meses.setEditor(new JSpinner.DefaultEditor(meses));
 
         meses.setPreferredSize(new Dimension(90, (int) meses.getPreferredSize().getHeight()));
 
         JSpinner anios = new JSpinner(new SpinnerNumberModel(2022, 2000, 2030, 1));
+        anios.setEditor(new JSpinner.DefaultEditor(anios));
 
         fechaIda.add(new JLabel("Día"));
         fechaIda.add(dias);
@@ -114,6 +145,7 @@ public class UIPuntoDeVenta {
         JPanel personas = new JPanel();
         personas.add(new JLabel("Nº personas: "));
         JSpinner numPersonas = new JSpinner(new SpinnerNumberModel(1, 1, 10, 1));
+        numPersonas.setEditor(new JSpinner.DefaultEditor(numPersonas));
         personas.add(numPersonas);
         JButton boton = new JButton("Buscar");
         personas.add(boton);
