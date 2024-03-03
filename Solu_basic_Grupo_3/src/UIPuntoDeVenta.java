@@ -74,7 +74,6 @@ public class UIPuntoDeVenta {
         vuelta.setSelected(true);
 
 
-
         // bloqueamos el panel de vuelta
         ida.addActionListener(e -> {
             if (ida.isSelected()) {
