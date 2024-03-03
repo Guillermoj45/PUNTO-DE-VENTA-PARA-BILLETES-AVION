@@ -27,7 +27,13 @@ public class UIPuntoDeVenta {
 
 
     // Parte Gráfica 1 Guillermo -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
-   // TODO: sacar el mensaje mostrando toda la información
+
+    static HashMap<String,Component> Componentes = new HashMap<>();
+
+    private static void addComponente(String nombre, Component componente){
+        Componentes.put(nombre, componente);
+    }
+
     private static JPanel tituloPanel(){
         JPanel titulo = new JPanel();
         JLabel texto = new JLabel("PUNTOS DE VENTA DE BILLETES");
@@ -45,7 +51,15 @@ public class UIPuntoDeVenta {
 
         panelCentral.setLayout(new GridLayout(1, 2, 0, 0));
         panelCentral.add(panelIzquierdo());
-        panelCentral.add(trayectos());
+        panelCentral.add(panelDerecho());
+
+        JButton boton = (JButton) Componentes.get("Buscar");
+        boton.addActionListener(e->{
+            // TODO: Arreglar el mensaje de salida
+            //TODO: Hacer los ifs necesarios
+            String mensaje = ApoyoPuntoVenta.recoDate((String) ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem(), (String) ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem());
+            JOptionPane.showMessageDialog(null, mensaje);
+        });
 
         return panelCentral;
     }
@@ -55,10 +69,24 @@ public class UIPuntoDeVenta {
 
         panelIzquierdo.setLayout (new GridLayout(3, 1, 0, 0));
         panelIzquierdo.add(modalidad());
-        panelIzquierdo.add(panelFechas("Fecha de Ida"));
-        panelIzquierdo.add(panelFechas("Fecha Vuelta"));
+        JPanel fechaida = panelFechas("Fecha de Ida");
+        JPanel fechavuelta = panelFechas("Fecha Vuelta");
 
+        panelIzquierdo.add(fechaida);
+        panelIzquierdo.add(fechavuelta);
+
+        addComponente("Dia", fechaida.getComponent(1));
+        addComponente("Mes", fechaida.getComponent(3));
+        addComponente("Anio", fechaida.getComponent(5));
+
+        addComponente("DiaVuelta", fechavuelta.getComponent(1));
+        addComponente("MesVuelta", fechavuelta.getComponent(3));
+        addComponente("AnioVuelta", fechavuelta.getComponent(5));
+
+
+        // TODO: Optimizar esto con el diccionario
         // hacemos que sea el mismo valor en ida y vuelta
+
         JPanel fecha = (JPanel) panelIzquierdo.getComponent(1);
         JSpinner dias = (JSpinner) fecha.getComponent(1);
         JSpinner mes = (JSpinner) fecha.getComponent(3);
@@ -77,6 +105,7 @@ public class UIPuntoDeVenta {
             String mes1 = (String) mes.getValue();
             mesVuelta.setValue(mes1);
         });
+        // TODO: Arreglar que cuando cambies a un año visiesto se actualice el numero de dias del mes
         anio.addChangeListener(e->{
             int anio1 = (int) anio.getValue();
             anioVuelta.setValue(anio1);
@@ -90,6 +119,7 @@ public class UIPuntoDeVenta {
         // hacemos que el botón de ida esté seleccionado por defecto
         vuelta.setSelected(true);
 
+        //TODO:Hacer que eso se ejecute solo cuando esta activado no desactivado
 
         // bloqueamos el panel de vuelta
         ida.addActionListener(e -> {
@@ -126,6 +156,8 @@ public class UIPuntoDeVenta {
         JRadioButton ida = new JRadioButton("Solo Ida");
         JRadioButton idaVuelta = new JRadioButton("Ida/Vuelta");
         ButtonGroup grupo = new ButtonGroup();
+
+        addComponente("ida", ida);
 
         panelModalidad.add(ida);
         panelModalidad.add(idaVuelta);
@@ -169,11 +201,11 @@ public class UIPuntoDeVenta {
 
         meses.addChangeListener(e -> {
                 String mes = (String) meses.getValue();
-                int diasMes = 0;
+                int diasMes;
                 for (Month month : Month.values()) {
                     if (month.getDisplayName(TextStyle.FULL, Locale.forLanguageTag("es")).equalsIgnoreCase(mes)) {
                         diasMes = month.length(LocalDate.parse("12/2/" + anios.getValue(), DateTimeFormatter.ofPattern("dd/M/yyyy")).isLeapYear());
-                        dias.setModel(new SpinnerNumberModel(1, 1, diasMes, 1));
+                        dias.setModel(new SpinnerNumberModel(Integer.parseInt(String.valueOf(dias.getValue())), 1, diasMes, 1));
                     }
                 }
         });
@@ -189,16 +221,19 @@ public class UIPuntoDeVenta {
         return fechaIda;
     }
 
-    private static JPanel trayectos(){
+    private static JPanel panelDerecho(){
         JPanel trayecto = new JPanel();
         trayecto.setLayout(new GridLayout(3, 1, 0, 0));
         TitledBorder centerBorder = BorderFactory.createTitledBorder("Trayecto");
         centerBorder.setTitleJustification(TitledBorder.CENTER);
         trayecto.setBorder(centerBorder);
 
-        JPanel origen = jBoxLugares("Origen: ");
+        JPanel origen = jBoxLugares(" Origen: ");
         JPanel destino = jBoxLugares("Destino: ");
         JPanel personas = Personas();
+
+        addComponente("Origen", origen.getComponent(1));
+        addComponente("Destino", destino.getComponent(1));
 
 
         ((JComboBox<?>) origen.getComponent(1)).addActionListener(e -> {
@@ -223,6 +258,8 @@ public class UIPuntoDeVenta {
         numPersonas.setEditor(new JSpinner.DefaultEditor(numPersonas));
         personas.add(numPersonas);
         JButton boton = new JButton("Buscar");
+        addComponente("NumPersonas", numPersonas);
+        addComponente("Buscar", boton);
         personas.add(boton);
         return personas;
     }
@@ -237,6 +274,9 @@ public class UIPuntoDeVenta {
         for (String sitio : sitios.keySet()) {
             origen.addItem(sitio);
         }
+        Componentes.remove("Destino");
+        Componentes.put("Destino", origen);
+
         datos.add(new JLabel("Destino: "));
         datos.add(origen);
         return datos;
