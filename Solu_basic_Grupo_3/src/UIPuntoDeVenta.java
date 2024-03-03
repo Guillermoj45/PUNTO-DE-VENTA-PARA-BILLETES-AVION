@@ -12,7 +12,7 @@ public class UIPuntoDeVenta {
         frame.setLayout(new GridLayout(3, 1,0,0));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
+        frame.setLocationRelativeTo(null);
         frame.add(primerPanel());
         frame.setVisible(true);
         frame.pack();
@@ -52,7 +52,7 @@ public class UIPuntoDeVenta {
         JRadioButton ida = new JRadioButton("Solo Ida");
         JRadioButton idaVuelta = new JRadioButton("Ida/Vuelta");
         ButtonGroup grupo = new ButtonGroup();
-        ida.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
+
         panelModalidad.add(ida);
         panelModalidad.add(idaVuelta);
         // dibujamos un borde alrededor del panel con el título "Modalidad" centrado
