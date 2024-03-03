@@ -9,6 +9,7 @@ import java.util.HashMap;
 public class UIPuntoDeVenta {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Air Camela");
+
         frame.setSize(600, 700);
         frame.setLayout(new GridLayout(3, 1,0,0));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -19,39 +20,52 @@ public class UIPuntoDeVenta {
         frame.pack();
         frame.setResizable(false);
     }
+
+
     // Parte Gráfica 1 Guillermo -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
     private static JPanel tituloPanel(){
         JPanel titulo = new JPanel();
         JLabel texto = new JLabel("PUNTOS DE VENTA DE BILLETES");
+
         // aplicamos Verdana, 20, Negrita Borde hundido
         texto.setFont(new Font("Verdana", Font.BOLD, 20));
         titulo.setBorder(BorderFactory.createRaisedBevelBorder());
         titulo.add(texto);
+
         return titulo;
     }
 
     private static JPanel panelCentral(){
         JPanel panelCentral = new JPanel();
+
         panelCentral.setLayout(new GridLayout(1, 2, 0, 0));
         panelCentral.add(panelIzquierdo());
         panelCentral.add(trayectos());
+
         return panelCentral;
     }
 
     private static JPanel panelIzquierdo(){
         JPanel panelIzquierdo = new JPanel();
+
         panelIzquierdo.setLayout (new GridLayout(3, 1, 0, 0));
         panelIzquierdo.add(modalidad());
         panelIzquierdo.add(panelFechas("Fecha de Ida"));
         panelIzquierdo.add(panelFechas("Fecha Vuelta"));
+
         JPanel hola = (JPanel) panelIzquierdo.getComponent(0);
         JRadioButton ida = (JRadioButton) hola.getComponent(0);
         JRadioButton vuelta = (JRadioButton) hola.getComponent(1);
+
+        // hacemos que el botón de ida esté seleccionado por defecto
+        vuelta.setSelected(true);
+
         ida.addActionListener(e -> {
             if (ida.isSelected()) {
                 bloqueoComponente(panelIzquierdo.getComponent(2));
             }
         });
+
         vuelta.addActionListener(e -> {
             if (vuelta.isSelected()) {
                 desbloqueoComponente(panelIzquierdo.getComponent(2));
@@ -66,6 +80,7 @@ public class UIPuntoDeVenta {
             c.setEnabled(false);
         }
     }
+
     private static void desbloqueoComponente(Component componente){
         for (Component c : ((Container) componente).getComponents()) {
             c.setEnabled(true);
@@ -81,6 +96,7 @@ public class UIPuntoDeVenta {
 
         panelModalidad.add(ida);
         panelModalidad.add(idaVuelta);
+
         // dibujamos un borde alrededor del panel con el título "Modalidad" centrado
         TitledBorder centerBorder = BorderFactory.createTitledBorder("Modalidad");
         centerBorder.setTitleJustification(TitledBorder.CENTER);
@@ -96,7 +112,7 @@ public class UIPuntoDeVenta {
         JPanel fechaIda = new JPanel();
         JSpinner dias = new JSpinner(new SpinnerNumberModel(1, 1, 31, 1));
         dias.setBounds(70, 130, 50, 40);
-        // Hacemos que dias no se pueda cambiar manualmente
+        // Hacemos que días no se pueda cambiar manualmente
         dias.setEditor(new JSpinner.DefaultEditor(dias));
 
         String[] nombreMes = { "Enero", "Febrero", "Marzo",
@@ -133,11 +149,32 @@ public class UIPuntoDeVenta {
         JPanel personas = Personas();
 
 
+        ((JComboBox<?>) origen.getComponent(1)).addActionListener(e -> {
+            JComboBox<?> ida = (JComboBox<?>) e.getSource();
+            String lugar = (String) ida.getSelectedItem();
+            trayecto.remove(1);
+            trayecto.add(sustituirPanel("Destino: ", lugar), 1);
+            trayecto.revalidate();
+        });
+
         origen.setBounds(50, 50, 90, 20);
         trayecto.add(origen);
         trayecto.add(destino);
         trayecto.add(personas);
         return trayecto;
+    }
+
+    private static JPanel sustituirPanel(String texto, String lugar){
+        JPanel datos = new JPanel();
+        JComboBox <String> origen = new JComboBox<>();
+        HashMap <String,String> sitios = ApoyoPuntoVenta.lugares();
+        sitios.remove(lugar);
+        for (String sitio : sitios.keySet()) {
+            origen.addItem(sitio);
+        }
+        datos.add(new JLabel(texto));
+        datos.add(origen);
+        return datos;
     }
 
     private static JPanel Personas(){
