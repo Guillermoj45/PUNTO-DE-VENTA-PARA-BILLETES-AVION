@@ -96,21 +96,27 @@ public class UIPuntoDeVenta {
         JSpinner mesVuelta = (JSpinner) ((JPanel) panelIzquierdo.getComponent(2)).getComponent(3);
         JSpinner anioVuelta = (JSpinner) ((JPanel) panelIzquierdo.getComponent(2)).getComponent(5);
 
-        // Creamos una interfaz funcionar con expression lambda para que las fechas de ida y vuelta sean iguales
+
         dias.addChangeListener(e->{
-            int dia = (int) dias.getValue();
-            diaVuelta.setValue(dia);
+            if (Componentes.get("DiaVuelta").isEnabled()) {
+                int dia = (int) dias.getValue();
+                diaVuelta.setValue(dia);
+            }
         });
         mes.addChangeListener(e->{
-            String mes1 = (String) mes.getValue();
-            mesVuelta.setValue(mes1);
+            if (Componentes.get("DiaVuelta").isEnabled()) {
+                String mes1 = (String) mes.getValue();
+                mesVuelta.setValue(mes1);
+            }
         });
-        // TODO: Arreglar que cuando cambies a un año visiesto se actualice el numero de dias del mes
         anio.addChangeListener(e->{
-            int anio1 = (int) anio.getValue();
-            anioVuelta.setValue(anio1);
+            if (Componentes.get("DiaVuelta").isEnabled()) {
+                int anio1 = (int) anio.getValue();
+                anioVuelta.setValue(anio1);
+            }
         });
 
+        // Creamos una interfaz funcionar con expression lambda para que las fechas de ida y vuelta sean iguales
         // Declaramos las variables que luego usaremos para bloquear y desbloquear los paneles
         JPanel panel = (JPanel) panelIzquierdo.getComponent(0);
         JRadioButton ida = (JRadioButton) panel.getComponent(0);
@@ -119,7 +125,7 @@ public class UIPuntoDeVenta {
         // hacemos que el botón de ida esté seleccionado por defecto
         vuelta.setSelected(true);
 
-        //TODO:Hacer que eso se ejecute solo cuando esta activado no desactivado
+        // TODO:Hacer que eso se ejecute solo cuando esta activado no desactivado
 
         // bloqueamos el panel de vuelta
         ida.addActionListener(e -> {
@@ -199,6 +205,7 @@ public class UIPuntoDeVenta {
         JSpinner anios = new JSpinner(new SpinnerNumberModel(Integer.parseInt(String.valueOf(LocalDate.now().getYear())), 2002, 2030, 1));
         anios.setEditor(new JSpinner.DefaultEditor(anios));
 
+        //TODO: Optimizar esta parte (si da tiempo)
         meses.addChangeListener(e -> {
                 String mes = (String) meses.getValue();
                 int diasMes;
@@ -208,6 +215,17 @@ public class UIPuntoDeVenta {
                         dias.setModel(new SpinnerNumberModel(Integer.parseInt(String.valueOf(dias.getValue())), 1, diasMes, 1));
                     }
                 }
+        });
+
+        anios.addChangeListener(e ->{
+            String mes = (String) meses.getValue();
+            int diasMes;
+            for (Month month : Month.values()) {
+                if (month.getDisplayName(TextStyle.FULL, Locale.forLanguageTag("es")).equalsIgnoreCase(mes)) {
+                    diasMes = month.length(LocalDate.parse("12/2/" + anios.getValue(), DateTimeFormatter.ofPattern("dd/M/yyyy")).isLeapYear());
+                    dias.setModel(new SpinnerNumberModel(Integer.parseInt(String.valueOf(dias.getValue())), 1, diasMes, 1));
+                }
+            }
         });
 
         fechaIda.add(new JLabel("Día"));
