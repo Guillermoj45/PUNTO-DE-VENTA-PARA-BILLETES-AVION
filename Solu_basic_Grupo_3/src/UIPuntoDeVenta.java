@@ -84,7 +84,7 @@ public class UIPuntoDeVenta {
         addComponente("AnioVuelta", fechavuelta.getComponent(5));
 
 
-        // TODO: Optimizar esto con el diccionario
+        // TODO: Optimizar esto con el diccionario(si da tiempo)
         // hacemos que sea el mismo valor en ida y vuelta
 
         JPanel fecha = (JPanel) panelIzquierdo.getComponent(1);
