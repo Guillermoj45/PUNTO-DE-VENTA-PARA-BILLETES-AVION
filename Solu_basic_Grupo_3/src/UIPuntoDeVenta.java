@@ -250,7 +250,7 @@ public class UIPuntoDeVenta {
 
     private static JPanel panelFechas(String titulo){
         JPanel fechaIda = new JPanel();
-        JSpinner dias = new JSpinner(new SpinnerNumberModel(Integer.parseInt(String.valueOf(LocalDate.now().getDayOfMonth())), 1, 31, 1));
+        JSpinner dias = new JSpinner(new SpinnerNumberModel(1, 1, 31, 1));
 
         dias.setPreferredSize(new Dimension(50, (int) dias.getPreferredSize().getHeight()));
 
@@ -266,12 +266,12 @@ public class UIPuntoDeVenta {
         meses.setEditor(new JSpinner.DefaultEditor(meses));
 
         // Para obtener el mes actual y seleccionarlo por defecto
-        meses.setValue(nombreMes[LocalDate.now().getMonthValue() - 1]);
+        meses.setValue("Septiembre");
 
         // Hacemos que el tamaño del JSpinner sea fijo
         meses.setPreferredSize(new Dimension(90, (int) meses.getPreferredSize().getHeight()));
 
-        JSpinner anios = new JSpinner(new SpinnerNumberModel(Integer.parseInt(String.valueOf(LocalDate.now().getYear())), 2002, 2030, 1));
+        JSpinner anios = new JSpinner(new SpinnerNumberModel(2002, 2002, 2030, 1));
         anios.setEditor(new JSpinner.DefaultEditor(anios));
 
         //TODO: Optimizar esta parte (si da tiempo)
