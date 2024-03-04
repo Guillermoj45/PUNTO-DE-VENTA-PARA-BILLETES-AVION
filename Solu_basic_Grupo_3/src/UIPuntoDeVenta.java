@@ -78,8 +78,23 @@ public class UIPuntoDeVenta {
                     mensaje += "Vuelta: " + ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + "/" + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem() + " " + ((JSpinner) Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
                     mensaje += "(" + ((JSpinner) Componentes.get("NumPersonas")).getValue() + " personas)";
                 }
+
                 int si = JOptionPane.showConfirmDialog(null, mensaje);
+
                 if (si == 0) {
+                    if (((JPanel)(Componentes.get("panel"))).getComponentCount() > 1){
+                        ((JPanel) Componentes.get("panel")).remove(1);
+                    }
+
+//                    for (((JPanel)Componentes.get("panel")).()) {
+//
+//                    }
+//
+//
+//                    if (objetos > 1) {
+//                        ((JPanel) Componentes.get("panel")).remove(1);
+//                    }
+
                     ((JPanel) Componentes.get("panel")).add(panel2());
                     frame.pack();
                     JOptionPane.showMessageDialog(null, "si realizada con éxito");
@@ -104,6 +119,7 @@ public class UIPuntoDeVenta {
         (panel).add(primerPanel());
         addComponente("panel", panel);
         Componentes.get("panel").revalidate();
+        frame.pack();
     }
 
     private static JPanel panelPrincipal(){
@@ -407,12 +423,17 @@ public class UIPuntoDeVenta {
         String Origen = (String) ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem();
         String Destino = (String) ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem();
 
-        panel.setLayout(new GridLayout(1, 2, 0, 0));
+
         JPanel ida = idaDispo(ApoyoPuntoVenta.recoDate(Origen, Destino), "Ida");
         JPanel vuelta = idaDispo(ApoyoPuntoVenta.recoDate(Destino, Origen), "Vuelta");
 
         panel.add(ida);
-        panel.add(vuelta);
+        if (((JRadioButton) Componentes.get("idaVuelta")).isSelected()){
+            panel.add(vuelta);
+            panel.setLayout(new GridLayout(1, 2, 0, 0));
+        }else {
+            panel.setLayout(new GridLayout(1, 1, 0, 0));
+        }
 
         addComponente("idaPrimeraHora", ida.getComponent(0));
         addComponente("idaUltimaHora", ida.getComponent(1));
