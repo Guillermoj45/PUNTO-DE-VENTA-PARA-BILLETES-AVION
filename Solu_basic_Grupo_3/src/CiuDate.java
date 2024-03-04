@@ -30,7 +30,7 @@ public class CiuDate {
         OVD.add("OVD"); OVD.add("08:55"); OVD.add("20:15");OVD.add("85");
 
         // Devolvemos la lista de valores
-        return new ArrayList[] {BCN,MAD,BIO};
+        return new ArrayList[] {BCN,MAD,BIO,VLC,AGP,LCG,SDR,OVD};
     }
 
     // Vuelos Barcelona

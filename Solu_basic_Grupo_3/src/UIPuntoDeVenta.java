@@ -31,10 +31,12 @@ public class UIPuntoDeVenta {
 
     // Parte Gráfica 1 Guillermo -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
 
-    static HashMap<String,Component> Componentes = new HashMap<>();
+    static HashMap<String,Component> componentes = new HashMap<>();
+    // TODO: Para vega :=)
+    static Integer numeroDePerosnas;
 
     private static void addComponente(String nombre, Component componente){
-        Componentes.put(nombre, componente);
+        componentes.put(nombre, componente);
     }
 
     private static JPanel tituloPanel(){
@@ -56,37 +58,50 @@ public class UIPuntoDeVenta {
         panelCentral.add(panelIzquierdo());
         panelCentral.add(panelDerecho());
 
-        JButton boton = (JButton) Componentes.get("Buscar");
+        JButton boton = (JButton) componentes.get("Buscar");
         boton.addActionListener(e->{
             String mensaje = null;
-            if (((JComboBox<?>) Componentes.get("Origen")).getSelectedItem().equals("-------------") || ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem().equals("-------------")){
+            if (((JComboBox<?>) componentes.get("Origen")).getSelectedItem().equals("-------------") || ((JComboBox<?>) componentes.get("Destino")).getSelectedItem().equals("-------------")){
                 JOptionPane.showMessageDialog(null, "Por favor, seleccione un origen y un destino");
             }
             else {
-                if (((JRadioButton) Componentes.get("ida")).isSelected() && ((JSpinner) Componentes.get("NumPersonas")).getValue().equals(1)) {
-                    mensaje = "Ida: " + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
-                    mensaje += "(" + ((JSpinner) Componentes.get("NumPersonas")).getValue() + " persona)";
-                } else if (((JRadioButton) Componentes.get("ida")).isSelected() && (Integer) ((JSpinner) Componentes.get("NumPersonas")).getValue() > 1) {
-                    mensaje = "Ida: " + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
-                    mensaje += "(" + ((JSpinner) Componentes.get("NumPersonas")).getValue() + " personas)";
-                } else if (((JRadioButton) Componentes.get("idaVuelta")).isSelected() && ((JSpinner) Componentes.get("NumPersonas")).getValue().equals(1)) {
-                    mensaje = "Ida: " + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
-                    mensaje += "Vuelta: " + ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + "/" + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem() + " " + ((JSpinner) Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
-                    mensaje += "(" + ((JSpinner) Componentes.get("NumPersonas")).getValue() + " persona)";
-                } else if (((JRadioButton) Componentes.get("idaVuelta")).isSelected() && (Integer) ((JSpinner) Componentes.get("NumPersonas")).getValue() > 1) {
-                    mensaje = "Ida: " + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
-                    mensaje += "Vuelta: " + ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + "/" + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem() + " " + ((JSpinner) Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
-                    mensaje += "(" + ((JSpinner) Componentes.get("NumPersonas")).getValue() + " personas)";
+                if (((JRadioButton) componentes.get("ida")).isSelected() && ((JSpinner) componentes.get("NumPersonas")).getValue().equals(1)) {
+
+                    mensaje = "Ida: " + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) componentes.get("Dia")).getValue() + "-" + ((JSpinner) componentes.get("Mes")).getValue() + "-" + ((JSpinner) componentes.get("Anio")).getValue() + "\n";
+                    mensaje += "(" + ((JSpinner) componentes.get("NumPersonas")).getValue() + " persona)";
+                }
+                else if (((JRadioButton) componentes.get("ida")).isSelected() && (Integer) ((JSpinner) componentes.get("NumPersonas")).getValue() > 1) {
+
+                    mensaje = "Ida: " + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) componentes.get("Dia")).getValue() + "-" + ((JSpinner) componentes.get("Mes")).getValue() + "-" + ((JSpinner) componentes.get("Anio")).getValue() + "\n";
+                    mensaje += "(" + ((JSpinner) componentes.get("NumPersonas")).getValue() + " personas)";
+                }
+                else if (((JRadioButton) componentes.get("idaVuelta")).isSelected() && ((JSpinner) componentes.get("NumPersonas")).getValue().equals(1)) {
+
+                    mensaje = "Ida: " + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) componentes.get("Dia")).getValue() + "-" + ((JSpinner) componentes.get("Mes")).getValue() + "-" + ((JSpinner) componentes.get("Anio")).getValue() + "\n";
+                    mensaje += "Vuelta: " + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + " " + ((JSpinner) componentes.get("Dia")).getValue() + "-" + ((JSpinner) componentes.get("Mes")).getValue() + "-" + ((JSpinner) componentes.get("Anio")).getValue() + "\n";
+                    mensaje += "(" + ((JSpinner) componentes.get("NumPersonas")).getValue() + " persona)";
+                }
+                else if (((JRadioButton) componentes.get("idaVuelta")).isSelected() && (Integer) ((JSpinner) componentes.get("NumPersonas")).getValue() > 1) {
+
+                    mensaje = "Ida: " + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) componentes.get("Dia")).getValue() + "-" + ((JSpinner) componentes.get("Mes")).getValue() + "-" + ((JSpinner) componentes.get("Anio")).getValue() + "\n";
+                    mensaje += "Vuelta: " + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + " " + ((JSpinner) componentes.get("Dia")).getValue() + "-" + ((JSpinner) componentes.get("Mes")).getValue() + "-" + ((JSpinner) componentes.get("Anio")).getValue() + "\n";
+                    mensaje += "(" + ((JSpinner) componentes.get("NumPersonas")).getValue() + " personas)";
                 }
 
                 int si = JOptionPane.showConfirmDialog(null, mensaje);
 
                 if (si == 0) {
-                    if (((JPanel)(Componentes.get("panel"))).getComponentCount() > 1){
-                        ((JPanel) Componentes.get("panel")).remove(1);
+
+                    if (((JPanel)(componentes.get("panel"))).getComponentCount() > 1){
+
+                        ((JPanel) componentes.get("panel")).remove(1);
+
                     }
 
-                    ((JPanel) Componentes.get("panel")).add(panel2());
+                    numeroDePerosnas = ((Integer) ((JSpinner) componentes.get("NumPersonas")).getValue());
+                    System.out.println(numeroDePerosnas);
+
+                    ((JPanel) componentes.get("panel")).add(panel2());
 
                     frame.pack();
                 } else if (si== 1){
@@ -103,13 +118,13 @@ public class UIPuntoDeVenta {
     }
 
     private static void borronCuentaNueva(){
-        ((JPanel)Componentes.get("panel")).removeAll();
-        JPanel panel = (JPanel)Componentes.get("panel");
-        Componentes.clear();
+        ((JPanel) componentes.get("panel")).removeAll();
+        JPanel panel = (JPanel) componentes.get("panel");
+        componentes.clear();
 
         (panel).add(primerPanel());
         addComponente("panel", panel);
-        Componentes.get("panel").revalidate();
+        componentes.get("panel").revalidate();
         frame.pack();
     }
 
@@ -119,7 +134,7 @@ public class UIPuntoDeVenta {
         PanelPrincipal.setBorder(BorderFactory.createRaisedBevelBorder());
         PanelPrincipal.setLayout(new BoxLayout(PanelPrincipal, BoxLayout.Y_AXIS));
 
-        Componentes.put("panel", PanelPrincipal);
+        componentes.put("panel", PanelPrincipal);
 
         return PanelPrincipal;
     }
@@ -157,19 +172,19 @@ public class UIPuntoDeVenta {
 
 
         dias.addChangeListener(e->{
-            if (Componentes.get("DiaVuelta").isEnabled()) {
+            if (componentes.get("DiaVuelta").isEnabled()) {
                 int dia = (int) dias.getValue();
                 diaVuelta.setValue(dia);
             }
         });
         mes.addChangeListener(e->{
-            if (Componentes.get("DiaVuelta").isEnabled()) {
+            if (componentes.get("DiaVuelta").isEnabled()) {
                 String mes1 = (String) mes.getValue();
                 mesVuelta.setValue(mes1);
             }
         });
         anio.addChangeListener(e->{
-            if (Componentes.get("DiaVuelta").isEnabled()) {
+            if (componentes.get("DiaVuelta").isEnabled()) {
                 int anio1 = (int) anio.getValue();
                 anioVuelta.setValue(anio1);
             }
@@ -352,8 +367,8 @@ public class UIPuntoDeVenta {
         for (String sitio : sitios.keySet()) {
             origen.addItem(sitio);
         }
-        Componentes.remove("Destino");
-        Componentes.put("Destino", origen);
+        componentes.remove("Destino");
+        componentes.put("Destino", origen);
 
         datos.add(new JLabel("Destino: "));
         datos.add(origen);
@@ -406,20 +421,24 @@ public class UIPuntoDeVenta {
         JButton boton = new JButton("Confirmar Elecciones");
         boton.setPreferredSize(new Dimension(170, 25));
         panel.add(boton);
+
+        boton.addActionListener(e->{
+            ((JPanel) componentes.get("panel")).add(panel3());
+        });
         return panel;
     }
 
     private static JPanel idaVuelta(){
         JPanel panel = new JPanel();
-        String Origen = (String) ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem();
-        String Destino = (String) ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem();
+        String Origen = (String) ((JComboBox<?>) componentes.get("Origen")).getSelectedItem();
+        String Destino = (String) ((JComboBox<?>) componentes.get("Destino")).getSelectedItem();
 
 
         JPanel ida = idaDispo(ApoyoPuntoVenta.recoDate(Origen, Destino), "Ida");
         JPanel vuelta = idaDispo(ApoyoPuntoVenta.recoDate(Destino, Origen), "Vuelta");
 
         panel.add(ida);
-        if (((JRadioButton) Componentes.get("idaVuelta")).isSelected()){
+        if (((JRadioButton) componentes.get("idaVuelta")).isSelected()){
             panel.add(vuelta);
             panel.setLayout(new GridLayout(1, 2, 0, 0));
         }else {
@@ -468,6 +487,17 @@ public class UIPuntoDeVenta {
 
 
     // Parte Gráfica 3 Vega -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
-
+    private static JPanel panel3(){
+        Tercer_panel tercerPanel = new Tercer_panel();
+        JPanel panel = new JPanel();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() { // Se ejecuta cuando se inicia la aplicación
+                // Crea un nuevo objeto de la clase Tercer_panel
+                new Tercer_panel().setVisible(true);
+            }
+        });
+        return panel;
+    }
 
 }
