@@ -86,18 +86,9 @@ public class UIPuntoDeVenta {
                         ((JPanel) Componentes.get("panel")).remove(1);
                     }
 
-//                    for (((JPanel)Componentes.get("panel")).()) {
-//
-//                    }
-//
-//
-//                    if (objetos > 1) {
-//                        ((JPanel) Componentes.get("panel")).remove(1);
-//                    }
-
                     ((JPanel) Componentes.get("panel")).add(panel2());
+
                     frame.pack();
-                    JOptionPane.showMessageDialog(null, "si realizada con éxito");
                 } else if (si== 1){
                     borronCuentaNueva();
                     JOptionPane.showMessageDialog(null, "Todos los ajustes se restablecieron");
