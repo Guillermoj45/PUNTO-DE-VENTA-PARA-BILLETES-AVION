@@ -11,8 +11,13 @@ import java.util.Locale;
 
 
 public class UIPuntoDeVenta {
-    static JFrame frame;
+     JFrame frame;
     public static void main(String[] args) {
+        UIPuntoDeVenta ui = new UIPuntoDeVenta();
+        ui.iniciar();
+    }
+
+    private void iniciar(){
 
         frame = new JFrame("Air Camela");
 
@@ -28,19 +33,18 @@ public class UIPuntoDeVenta {
         frame.setResizable(false);
     }
 
-
     // Parte Gráfica 1 Guillermo -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
 
-    static HashMap<String,Component> componentes = new HashMap<>();
+     HashMap<String,Component> componentes = new HashMap<>();
 
     // TODO: Para vega :=)
-    static Integer numeroDePerosnas;
+     Integer numeroDePerosnas;
 
-    private static void addComponente(String nombre, Component componente){
+    private  void addComponente(String nombre, Component componente){
         componentes.put(nombre, componente);
     }
 
-    private static JPanel tituloPanel(){
+    private  JPanel tituloPanel(){
         JPanel titulo = new JPanel();
         JLabel texto = new JLabel("PUNTOS DE VENTA DE BILLETES");
 
@@ -52,7 +56,7 @@ public class UIPuntoDeVenta {
         return titulo;
     }
 
-    private static JPanel panelCentral(){
+    private  JPanel panelCentral(){
         JPanel panelCentral = new JPanel();
 
         panelCentral.setLayout(new GridLayout(1, 2, 0, 0));
@@ -100,7 +104,6 @@ public class UIPuntoDeVenta {
                     }
 
                     numeroDePerosnas = ((Integer) ((JSpinner) componentes.get("NumPersonas")).getValue());
-                    System.out.println(numeroDePerosnas);
 
                     ((JPanel) componentes.get("panel")).add(panel2());
 
@@ -118,7 +121,7 @@ public class UIPuntoDeVenta {
         return panelCentral;
     }
 
-    private static void borronCuentaNueva(){
+    private  void borronCuentaNueva(){
         ((JPanel) componentes.get("panel")).removeAll();
         JPanel panel = (JPanel) componentes.get("panel");
         componentes.clear();
@@ -129,7 +132,7 @@ public class UIPuntoDeVenta {
         frame.pack();
     }
 
-    private static JPanel panelPrincipal(){
+    private  JPanel panelPrincipal(){
         JPanel PanelPrincipal = new JPanel();
         PanelPrincipal.add(primerPanel());
         PanelPrincipal.setBorder(BorderFactory.createRaisedBevelBorder());
@@ -139,7 +142,7 @@ public class UIPuntoDeVenta {
 
         return PanelPrincipal;
     }
-    private static JPanel panelIzquierdo(){
+    private  JPanel panelIzquierdo(){
         JPanel panelIzquierdo = new JPanel();
 
         panelIzquierdo.setLayout (new GridLayout(3, 1, 0, 0));
@@ -219,19 +222,19 @@ public class UIPuntoDeVenta {
         return panelIzquierdo;
     }
 
-    private static void bloqueoComponente(Component componente){
+    private  void bloqueoComponente(Component componente){
         for (Component c : ((Container) componente).getComponents()) {
             c.setEnabled(false);
         }
     }
 
-    private static void desbloqueoComponente(Component componente){
+    private  void desbloqueoComponente(Component componente){
         for (Component c : ((Container) componente).getComponents()) {
             c.setEnabled(true);
         }
     }
 
-    private static JPanel modalidad(){
+    private  JPanel modalidad(){
         JPanel panelModalidad = new JPanel();
 
         JRadioButton ida = new JRadioButton("Solo Ida");
@@ -255,7 +258,7 @@ public class UIPuntoDeVenta {
         return panelModalidad;
     }
 
-    private static JPanel panelFechas(String titulo){
+    private  JPanel panelFechas(String titulo){
         JPanel fechaIda = new JPanel();
         JSpinner dias = new JSpinner(new SpinnerNumberModel(1, 1, 31, 1));
 
@@ -315,7 +318,7 @@ public class UIPuntoDeVenta {
         return fechaIda;
     }
 
-    private static JPanel panelDerecho(){
+    private  JPanel panelDerecho(){
         JPanel trayecto = new JPanel();
         trayecto.setLayout(new GridLayout(3, 1, 0, 0));
         TitledBorder centerBorder = BorderFactory.createTitledBorder("Trayecto");
@@ -345,7 +348,7 @@ public class UIPuntoDeVenta {
         return trayecto;
     }
 
-    private static JPanel Personas(){
+    private  JPanel Personas(){
         JPanel personas = new JPanel();
         personas.add(new JLabel("Nº personas: "));
         JSpinner numPersonas = new JSpinner(new SpinnerNumberModel(1, 1, 10, 1));
@@ -358,7 +361,7 @@ public class UIPuntoDeVenta {
         return personas;
     }
 
-    private static JPanel sustituirPanel(String lugar){
+    private  JPanel sustituirPanel(String lugar){
         JPanel datos = new JPanel();
         JComboBox <String> origen = new JComboBox<>();
         HashMap <String,String> sitios = ApoyoPuntoVenta.lugares();
@@ -376,7 +379,7 @@ public class UIPuntoDeVenta {
         return datos;
     }
 
-    private static JPanel jBoxLugares(String texto){
+    private  JPanel jBoxLugares(String texto){
         JPanel datos = new JPanel();
         JComboBox <String> origen = new JComboBox<>();
         HashMap <String,String> sitios = ApoyoPuntoVenta.lugares();
@@ -390,7 +393,7 @@ public class UIPuntoDeVenta {
         return datos;
     }
 
-    private static JPanel primerPanel(){
+    private  JPanel primerPanel(){
         JPanel granPanel = new JPanel();
 
         granPanel.setBorder(new EmptyBorder(10, 0, 10, 0));
@@ -407,7 +410,7 @@ public class UIPuntoDeVenta {
 
     // Parte Gráfica 2 Pablo -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
 
-    private static JPanel panel2(){
+    private  JPanel panel2(){
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
         panel.add(titulo2P(), BorderLayout.NORTH);
@@ -417,7 +420,7 @@ public class UIPuntoDeVenta {
         return panel;
     }
 
-    private static JPanel botonIdaVuelta(){
+    private  JPanel botonIdaVuelta(){
         JPanel panel = new JPanel();
         JButton boton = new JButton("Confirmar Elecciones");
         boton.setPreferredSize(new Dimension(170, 25));
@@ -429,7 +432,7 @@ public class UIPuntoDeVenta {
         return panel;
     }
 
-    private static JPanel idaVuelta(){
+    private  JPanel idaVuelta(){
         JPanel panel = new JPanel();
         String Origen = (String) ((JComboBox<?>) componentes.get("Origen")).getSelectedItem();
         String Destino = (String) ((JComboBox<?>) componentes.get("Destino")).getSelectedItem();
@@ -454,7 +457,7 @@ public class UIPuntoDeVenta {
         return panel;
     }
 
-    private static JPanel idaDispo(String Primero,String Ettiqueta){
+    private  JPanel idaDispo(String Primero,String Ettiqueta){
         JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createTitledBorder(Ettiqueta));
         panel.setLayout(new GridLayout(2, 1, 0, 0));
@@ -472,7 +475,7 @@ public class UIPuntoDeVenta {
         return panel;
     }
 
-    private static JPanel titulo2P(){
+    private  JPanel titulo2P(){
         JPanel panel = new JPanel();
 
         JLabel texto = new JLabel("LOS VUELOS DISPONIBLES SON:");
@@ -488,7 +491,7 @@ public class UIPuntoDeVenta {
 
 
     // Parte Gráfica 3 Vega -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
-    private static JPanel panel3(){
+    private  JPanel panel3(){
         Tercer_panel tercerPanel = new Tercer_panel();
         JPanel panel = new JPanel();
         SwingUtilities.invokeLater(new Runnable() {
