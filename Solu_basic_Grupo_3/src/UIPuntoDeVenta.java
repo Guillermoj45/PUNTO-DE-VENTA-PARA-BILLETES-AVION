@@ -55,9 +55,25 @@ public class UIPuntoDeVenta {
 
         JButton boton = (JButton) Componentes.get("Buscar");
         boton.addActionListener(e->{
-            // TODO: Arreglar el mensaje de salida
-            //TODO: Hacer los ifs necesarios
-            String mensaje = ApoyoPuntoVenta.recoDate((String) ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem(), (String) ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem());
+            String mensaje = null;
+            if (((JRadioButton)Componentes.get("ida")).isSelected() && ((JSpinner)Componentes.get("NumPersonas")).getValue().equals(1)){
+                mensaje = "Ida: " + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem()+ "/"+ ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner)Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
+                mensaje += "(" + ((JSpinner) Componentes.get("NumPersonas")).getValue() + " persona)";
+            }
+            else if (((JRadioButton)Componentes.get("ida")).isSelected() && (Integer) ((JSpinner)Componentes.get("NumPersonas")).getValue() > 1){
+                mensaje = "Ida: " + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem()+ "/"+ ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner)Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
+                mensaje += "(" + ((JSpinner) Componentes.get("NumPersonas")).getValue() + " personas)";
+            }
+            else if (((JRadioButton)Componentes.get("idaVuelta")).isSelected() && ((JSpinner)Componentes.get("NumPersonas")).getValue().equals(1)){
+                mensaje = "Ida: " + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem()+ "/"+ ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner)Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
+                mensaje += "Vuelta: " + ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem()+ "/"+ ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem() + " " + ((JSpinner)Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
+                mensaje += "(" + ((JSpinner) Componentes.get("NumPersonas")).getValue() + " persona)";
+            }
+            else if (((JRadioButton)Componentes.get("idaVuelta")).isSelected() && (Integer) ((JSpinner)Componentes.get("NumPersonas")).getValue() > 1) {
+                mensaje = "Ida: " + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem()+ "/"+ ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner)Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
+                mensaje += "Vuelta: " + ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem()+ "/"+ ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem() + " " + ((JSpinner)Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
+                mensaje += "(" + ((JSpinner) Componentes.get("NumPersonas")).getValue() + " personas)";
+            }
             JOptionPane.showMessageDialog(null, mensaje);
         });
 
@@ -164,6 +180,7 @@ public class UIPuntoDeVenta {
         ButtonGroup grupo = new ButtonGroup();
 
         addComponente("ida", ida);
+        addComponente("idaVuelta", idaVuelta);
 
         panelModalidad.add(ida);
         panelModalidad.add(idaVuelta);
