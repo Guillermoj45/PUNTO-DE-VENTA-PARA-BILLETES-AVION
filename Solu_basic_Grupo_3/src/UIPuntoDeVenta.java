@@ -11,15 +11,18 @@ import java.util.Locale;
 
 
 public class UIPuntoDeVenta {
+    static JFrame frame;
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Air Camela");
+
+        frame = new JFrame("Air Camela");
 
         frame.setSize(600, 700);
-        frame.setLayout(new GridLayout(3, 1,0,0));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.setLocationRelativeTo(null);
-        frame.add(primerPanel());
+        JPanel primerPanel = panelPrincipal();
+        frame.add(primerPanel);
+
         frame.setVisible(true);
         frame.pack();
         frame.setResizable(false);
@@ -56,30 +59,63 @@ public class UIPuntoDeVenta {
         JButton boton = (JButton) Componentes.get("Buscar");
         boton.addActionListener(e->{
             String mensaje = null;
-            if (((JRadioButton)Componentes.get("ida")).isSelected() && ((JSpinner)Componentes.get("NumPersonas")).getValue().equals(1)){
-                mensaje = "Ida: " + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem()+ "/"+ ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner)Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
-                mensaje += "(" + ((JSpinner) Componentes.get("NumPersonas")).getValue() + " persona)";
+            if (((JComboBox<?>) Componentes.get("Origen")).getSelectedItem().equals("-------------") || ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem().equals("-------------")){
+                JOptionPane.showMessageDialog(null, "Por favor, seleccione un origen y un destino");
             }
-            else if (((JRadioButton)Componentes.get("ida")).isSelected() && (Integer) ((JSpinner)Componentes.get("NumPersonas")).getValue() > 1){
-                mensaje = "Ida: " + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem()+ "/"+ ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner)Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
-                mensaje += "(" + ((JSpinner) Componentes.get("NumPersonas")).getValue() + " personas)";
+            else {
+                if (((JRadioButton) Componentes.get("ida")).isSelected() && ((JSpinner) Componentes.get("NumPersonas")).getValue().equals(1)) {
+                    mensaje = "Ida: " + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
+                    mensaje += "(" + ((JSpinner) Componentes.get("NumPersonas")).getValue() + " persona)";
+                } else if (((JRadioButton) Componentes.get("ida")).isSelected() && (Integer) ((JSpinner) Componentes.get("NumPersonas")).getValue() > 1) {
+                    mensaje = "Ida: " + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
+                    mensaje += "(" + ((JSpinner) Componentes.get("NumPersonas")).getValue() + " personas)";
+                } else if (((JRadioButton) Componentes.get("idaVuelta")).isSelected() && ((JSpinner) Componentes.get("NumPersonas")).getValue().equals(1)) {
+                    mensaje = "Ida: " + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
+                    mensaje += "Vuelta: " + ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + "/" + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem() + " " + ((JSpinner) Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
+                    mensaje += "(" + ((JSpinner) Componentes.get("NumPersonas")).getValue() + " persona)";
+                } else if (((JRadioButton) Componentes.get("idaVuelta")).isSelected() && (Integer) ((JSpinner) Componentes.get("NumPersonas")).getValue() > 1) {
+                    mensaje = "Ida: " + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
+                    mensaje += "Vuelta: " + ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + "/" + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem() + " " + ((JSpinner) Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
+                    mensaje += "(" + ((JSpinner) Componentes.get("NumPersonas")).getValue() + " personas)";
+                }
+                int si = JOptionPane.showConfirmDialog(null, mensaje);
+                if (si == 0) {
+                    ((JPanel) Componentes.get("panel")).add(panel2());
+                    frame.pack();
+                    JOptionPane.showMessageDialog(null, "si realizada con éxito");
+                } else if (si== 1){
+                    borronCuentaNueva();
+                    JOptionPane.showMessageDialog(null, "Todos los ajustes se restablecieron");
+                } else if (si == 2){
+
+                    JOptionPane.showMessageDialog(null, "cancelada");
+                }
             }
-            else if (((JRadioButton)Componentes.get("idaVuelta")).isSelected() && ((JSpinner)Componentes.get("NumPersonas")).getValue().equals(1)){
-                mensaje = "Ida: " + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem()+ "/"+ ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner)Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
-                mensaje += "Vuelta: " + ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem()+ "/"+ ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem() + " " + ((JSpinner)Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
-                mensaje += "(" + ((JSpinner) Componentes.get("NumPersonas")).getValue() + " persona)";
-            }
-            else if (((JRadioButton)Componentes.get("idaVuelta")).isSelected() && (Integer) ((JSpinner)Componentes.get("NumPersonas")).getValue() > 1) {
-                mensaje = "Ida: " + ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem()+ "/"+ ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner)Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
-                mensaje += "Vuelta: " + ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem()+ "/"+ ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem() + " " + ((JSpinner)Componentes.get("Dia")).getValue() + "-" + ((JSpinner) Componentes.get("Mes")).getValue() + "-" + ((JSpinner) Componentes.get("Anio")).getValue() + "\n";
-                mensaje += "(" + ((JSpinner) Componentes.get("NumPersonas")).getValue() + " personas)";
-            }
-            JOptionPane.showMessageDialog(null, mensaje);
         });
 
         return panelCentral;
     }
 
+    private static void borronCuentaNueva(){
+        ((JPanel)Componentes.get("panel")).removeAll();
+        JPanel panel = (JPanel)Componentes.get("panel");
+        Componentes.clear();
+
+        (panel).add(primerPanel());
+        addComponente("panel", panel);
+        Componentes.get("panel").revalidate();
+    }
+
+    private static JPanel panelPrincipal(){
+        JPanel PanelPrincipal = new JPanel();
+        PanelPrincipal.add(primerPanel());
+        PanelPrincipal.setBorder(BorderFactory.createRaisedBevelBorder());
+        PanelPrincipal.setLayout(new BoxLayout(PanelPrincipal, BoxLayout.Y_AXIS));
+
+        Componentes.put("panel", PanelPrincipal);
+
+        return PanelPrincipal;
+    }
     private static JPanel panelIzquierdo(){
         JPanel panelIzquierdo = new JPanel();
 
@@ -348,6 +384,75 @@ public class UIPuntoDeVenta {
 
     // Parte Gráfica 2 Pablo -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
 
+    private static JPanel panel2(){
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.add(titulo2P(), BorderLayout.NORTH);
+        panel.add(idaVuelta(), BorderLayout.CENTER);
+        panel.setBorder(BorderFactory.createLoweredBevelBorder());
+        panel.add(botonIdaVuelta(), BorderLayout.SOUTH);
+        return panel;
+    }
+
+    private static JPanel botonIdaVuelta(){
+        JPanel panel = new JPanel();
+        JButton boton = new JButton("Confirmar Elecciones");
+        boton.setPreferredSize(new Dimension(170, 25));
+        panel.add(boton);
+        return panel;
+    }
+
+    private static JPanel idaVuelta(){
+        JPanel panel = new JPanel();
+        String Origen = (String) ((JComboBox<?>) Componentes.get("Origen")).getSelectedItem();
+        String Destino = (String) ((JComboBox<?>) Componentes.get("Destino")).getSelectedItem();
+
+        panel.setLayout(new GridLayout(1, 2, 0, 0));
+        JPanel ida = idaDispo(ApoyoPuntoVenta.recoDate(Origen, Destino), "Ida");
+        JPanel vuelta = idaDispo(ApoyoPuntoVenta.recoDate(Destino, Origen), "Vuelta");
+
+        panel.add(ida);
+        panel.add(vuelta);
+
+        addComponente("idaPrimeraHora", ida.getComponent(0));
+        addComponente("idaUltimaHora", ida.getComponent(1));
+        addComponente("vueltaPrimeraHora", vuelta.getComponent(0));
+        addComponente("vueltaUltimaHora", vuelta.getComponent(1));
+
+        return panel;
+    }
+
+    private static JPanel idaDispo(String Primero,String Ettiqueta){
+        JPanel panel = new JPanel();
+        panel.setBorder(BorderFactory.createTitledBorder(Ettiqueta));
+        panel.setLayout(new GridLayout(2, 1, 0, 0));
+        String[] datos = Primero.split("\n");
+
+        JRadioButton ida = new JRadioButton(datos[0]);
+        JRadioButton idaVuelta = new JRadioButton(datos[1]);
+        ButtonGroup grupo = new ButtonGroup();
+
+
+        panel.add(ida);
+        panel.add(idaVuelta);
+        grupo.add(ida);
+        grupo.add(idaVuelta);
+        return panel;
+    }
+
+    private static JPanel titulo2P(){
+        JPanel panel = new JPanel();
+
+        JLabel texto = new JLabel("LOS VUELOS DISPONIBLES SON:");
+
+        // aplicamos Verdana, 20, Negrita Borde hundido
+        texto.setFont(new Font("Verdana", Font.BOLD, 15));
+        panel.add(texto);
+
+
+        //panel.add(texto);
+        return panel;
+    }
 
 
     // Parte Gráfica 3 Vega -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
