@@ -32,6 +32,7 @@ public class UIPuntoDeVenta {
     // Parte Gráfica 1 Guillermo -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
 
     static HashMap<String,Component> componentes = new HashMap<>();
+
     // TODO: Para vega :=)
     static Integer numeroDePerosnas;
 
