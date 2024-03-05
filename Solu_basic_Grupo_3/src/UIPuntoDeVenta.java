@@ -69,28 +69,7 @@ public class UIPuntoDeVenta {
                 JOptionPane.showMessageDialog(null, "Por favor, seleccione un origen y un destino");
             }
             else {
-                if (((JRadioButton) componentes.get("ida")).isSelected() && ((JSpinner) componentes.get("NumPersonas")).getValue().equals(1)) {
-
-                    mensaje = "Ida: " + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) componentes.get("Dia")).getValue() + "-" + ((JSpinner) componentes.get("Mes")).getValue() + "-" + ((JSpinner) componentes.get("Anio")).getValue() + "\n";
-                    mensaje += "(" + ((JSpinner) componentes.get("NumPersonas")).getValue() + " persona)";
-                }
-                else if (((JRadioButton) componentes.get("ida")).isSelected() && (Integer) ((JSpinner) componentes.get("NumPersonas")).getValue() > 1) {
-
-                    mensaje = "Ida: " + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) componentes.get("Dia")).getValue() + "-" + ((JSpinner) componentes.get("Mes")).getValue() + "-" + ((JSpinner) componentes.get("Anio")).getValue() + "\n";
-                    mensaje += "(" + ((JSpinner) componentes.get("NumPersonas")).getValue() + " personas)";
-                }
-                else if (((JRadioButton) componentes.get("idaVuelta")).isSelected() && ((JSpinner) componentes.get("NumPersonas")).getValue().equals(1)) {
-
-                    mensaje = "Ida: " + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) componentes.get("Dia")).getValue() + "-" + ((JSpinner) componentes.get("Mes")).getValue() + "-" + ((JSpinner) componentes.get("Anio")).getValue() + "\n";
-                    mensaje += "Vuelta: " + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + " " + ((JSpinner) componentes.get("DiaVuelta")).getValue() + "-" + ((JSpinner) componentes.get("MesVuelta")).getValue() + "-" + ((JSpinner) componentes.get("AnioVuelta")).getValue() + "\n";
-                    mensaje += "(" + ((JSpinner) componentes.get("NumPersonas")).getValue() + " persona)";
-                }
-                else if (((JRadioButton) componentes.get("idaVuelta")).isSelected() && (Integer) ((JSpinner) componentes.get("NumPersonas")).getValue() > 1) {
-
-                    mensaje = "Ida: " + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) componentes.get("Dia")).getValue() + "-" + ((JSpinner) componentes.get("Mes")).getValue() + "-" + ((JSpinner) componentes.get("Anio")).getValue() + "\n";
-                    mensaje += "Vuelta: " + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + " " + ((JSpinner) componentes.get("DiaVuelta")).getValue() + "-" + ((JSpinner) componentes.get("MesVuelta")).getValue() + "-" + ((JSpinner) componentes.get("AnioVuelta")).getValue() + "\n";
-                    mensaje += "(" + ((JSpinner) componentes.get("NumPersonas")).getValue() + " personas)";
-                }
+                mensaje = mensajes(mensaje);
 
                 int si = JOptionPane.showConfirmDialog(null, mensaje);
 
@@ -119,6 +98,32 @@ public class UIPuntoDeVenta {
         });
 
         return panelCentral;
+    }
+
+    private String mensajes (String mensaje){
+        if (((JRadioButton) componentes.get("ida")).isSelected() && ((JSpinner) componentes.get("NumPersonas")).getValue().equals(1)) {
+
+            mensaje = "Ida: " + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) componentes.get("Dia")).getValue() + "-" + ((JSpinner) componentes.get("Mes")).getValue() + "-" + ((JSpinner) componentes.get("Anio")).getValue() + "\n";
+            mensaje += "(" + ((JSpinner) componentes.get("NumPersonas")).getValue() + " persona)";
+        }
+        else if (((JRadioButton) componentes.get("ida")).isSelected() && (Integer) ((JSpinner) componentes.get("NumPersonas")).getValue() > 1) {
+
+            mensaje = "Ida: " + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) componentes.get("Dia")).getValue() + "-" + ((JSpinner) componentes.get("Mes")).getValue() + "-" + ((JSpinner) componentes.get("Anio")).getValue() + "\n";
+            mensaje += "(" + ((JSpinner) componentes.get("NumPersonas")).getValue() + " personas)";
+        }
+        else if (((JRadioButton) componentes.get("idaVuelta")).isSelected() && ((JSpinner) componentes.get("NumPersonas")).getValue().equals(1)) {
+
+            mensaje = "Ida: " + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) componentes.get("Dia")).getValue() + "-" + ((JSpinner) componentes.get("Mes")).getValue() + "-" + ((JSpinner) componentes.get("Anio")).getValue() + "\n";
+            mensaje += "Vuelta: " + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + " " + ((JSpinner) componentes.get("DiaVuelta")).getValue() + "-" + ((JSpinner) componentes.get("MesVuelta")).getValue() + "-" + ((JSpinner) componentes.get("AnioVuelta")).getValue() + "\n";
+            mensaje += "(" + ((JSpinner) componentes.get("NumPersonas")).getValue() + " persona)";
+        }
+        else if (((JRadioButton) componentes.get("idaVuelta")).isSelected() && (Integer) ((JSpinner) componentes.get("NumPersonas")).getValue() > 1) {
+
+            mensaje = "Ida: " + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) componentes.get("Dia")).getValue() + "-" + ((JSpinner) componentes.get("Mes")).getValue() + "-" + ((JSpinner) componentes.get("Anio")).getValue() + "\n";
+            mensaje += "Vuelta: " + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + " " + ((JSpinner) componentes.get("DiaVuelta")).getValue() + "-" + ((JSpinner) componentes.get("MesVuelta")).getValue() + "-" + ((JSpinner) componentes.get("AnioVuelta")).getValue() + "\n";
+            mensaje += "(" + ((JSpinner) componentes.get("NumPersonas")).getValue() + " personas)";
+        }
+        return mensaje;
     }
 
     private void borronCuentaNueva(){
