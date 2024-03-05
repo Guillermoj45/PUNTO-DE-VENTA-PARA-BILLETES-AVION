@@ -16,6 +16,8 @@ public class UIPuntoDeVenta {
 
     // TODO: Para vega :=)
     Integer numeroDePerosnas;
+    Float precioIda;
+    Float precioTotalVuelta;
 
     protected void iniciar(){
         frame = new JFrame("Air Camela");
@@ -483,7 +485,7 @@ public class UIPuntoDeVenta {
                 else {
                     //TODO: Añadir panel de vega
                     Tercer_panel tercerPanel = new Tercer_panel();
-                    ((JPanel) componentes.get("panel")).add(tercerPanel.Tercer_panel(numeroDePerosnas, ((JRadioButton) componentes.get("ida")).isSelected()));
+                    ((JPanel) componentes.get("panel")).add(tercerPanel.Tercer_panel(numeroDePerosnas, ((JRadioButton) componentes.get("ida")).isSelected(), precioIda, precioTotalVuelta));
                     frame.pack();
                 }
             }
@@ -494,7 +496,7 @@ public class UIPuntoDeVenta {
                 else {
                     //TODO: Añadir panel de vega
                     Tercer_panel tercerPanel = new Tercer_panel();
-                    ((JPanel) componentes.get("panel")).add(tercerPanel.Tercer_panel(numeroDePerosnas, ((JRadioButton) componentes.get("ida")).isSelected()));
+                    ((JPanel) componentes.get("panel")).add(tercerPanel.Tercer_panel(numeroDePerosnas, ((JRadioButton) componentes.get("ida")).isSelected(), precioIda, precioTotalVuelta));
                     frame.pack();
                 }
             }
@@ -509,10 +511,14 @@ public class UIPuntoDeVenta {
 
         String Origen = (String) ((JComboBox<?>) componentes.get("Origen")).getSelectedItem();
         String Destino = (String) ((JComboBox<?>) componentes.get("Destino")).getSelectedItem();
+        String [] holo = ApoyoPuntoVenta.recoDate(Origen, Destino);
+
+        precioIda = Float.parseFloat(holo[1]);
+        precioTotalVuelta = Float.parseFloat(holo[2]);
 
 
-        JPanel ida = idaDispo(ApoyoPuntoVenta.recoDate(Origen, Destino), "Ida");
-        JPanel vuelta = idaDispo(ApoyoPuntoVenta.recoDate(Destino, Origen), "Vuelta");
+        JPanel ida = idaDispo(holo[0], "Ida");
+        JPanel vuelta = idaDispo(holo[0], "Vuelta");
 
         panel.add(ida);
         if (((JRadioButton) componentes.get("idaVuelta")).isSelected()){

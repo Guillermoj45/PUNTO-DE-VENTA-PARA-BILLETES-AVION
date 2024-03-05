@@ -1,13 +1,10 @@
-import java.util.Scanner;
+import java.util.*;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.TextStyle;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ApoyoPuntoVenta {
 
@@ -119,7 +116,7 @@ public class ApoyoPuntoVenta {
         IATA.put("Asturias", "OVD");
         return IATA;
     }
-    public static String recoDate(String Ciudad, String CiudadDest){
+    public static String[] recoDate(String Ciudad, String CiudadDest){
         String mensaje = "";
         System.out.println();
 
@@ -138,6 +135,7 @@ public class ApoyoPuntoVenta {
         tempos.put("SDR", CiuDate.Santander());
         tempos.put("OVD", CiuDate.Asturias());
 
+        String [] hola = new String[3];
 
         String Origen = IATA.get(Ciudad);
         String Destino = IATA.get(CiudadDest);
@@ -153,6 +151,7 @@ public class ApoyoPuntoVenta {
                     horaVuelta = LocalTime.parse(vuelo.get(2));
 
                     float Precio = (float) (Math.random()*25+35);
+                    float Precio1 = (float) (Math.random()*25+35);
 
                     LocalTime horaEsti =horaSalida.plusMinutes(Integer.parseInt(vuelo.get(3)));
                     LocalTime horaEsti2 =horaVuelta.plusMinutes(Integer.parseInt(vuelo.get(3)));
@@ -161,7 +160,8 @@ public class ApoyoPuntoVenta {
                     mensaje = Origen + "-" + Destino + " " + horaSalida + " " +
                             horaEsti + " " + formato.format(Precio) +"\n";
                     mensaje += Origen + "-" + Destino + " " + horaVuelta + " " +
-                            horaEsti2 + " " + formato.format(Precio) +"\n";
+                            horaEsti2 + " " + formato.format(Precio1) +"\n";
+                    hola = new String[] {mensaje, String.valueOf(Precio), String.valueOf(Precio1)};
                 }
             }
             if (mensaje.isEmpty()){
@@ -172,7 +172,7 @@ public class ApoyoPuntoVenta {
             mensaje = "La ciudad de origen no a sido encontrada";
         }
 
-        return mensaje;
+        return hola;
 
     }
 

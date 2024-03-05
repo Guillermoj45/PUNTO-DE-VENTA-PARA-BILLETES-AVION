@@ -20,8 +20,6 @@ public class Tercer_panel extends JFrame {
     // Labels del panel detalles
     private JLabel Label_asiento;
 
-    private JLabel label_img_billete;
-
 
     // TextFields del panel importes
     private JTextField Importes_asiento;
@@ -47,13 +45,24 @@ public class Tercer_panel extends JFrame {
     Boolean if_ida;
 
 
+    // Fotos billetes
+    JLabel label_img_billete= new JLabel();
+
+
+    Float precio_ida;
+    Float precio_vuelta;
+
+
+
     // Constructor
-    public JPanel Tercer_panel(int numero_personas, Boolean if_ida) {
+    public JPanel Tercer_panel(int numero_personas, Boolean if_ida, Float precio_ida, Float precio_vuelta) {
         setTitle("Air Camela");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.numero_personas = numero_personas;
         this.if_ida = if_ida;
+        this.precio_ida = precio_ida;
+        this.precio_vuelta = precio_vuelta;
 
         Tercer_panel = new JPanel();
 
@@ -86,7 +95,7 @@ public class Tercer_panel extends JFrame {
         Tercer_panel.add(Panel_segunda_parte);
 
         // Le doy un valor inicial a los precios
-        Precio_asiento = 0;
+        Precio_asiento = 12;
         Precio_embarque = 0;
         Precio_equipaje = 0;
 
@@ -224,7 +233,7 @@ public class Tercer_panel extends JFrame {
         // Crea los paneles para los importes y los billetes
         JPanel Panel_importes = new JPanel();
 
-        JPanel Panel_billetes = new JPanel();
+        JPanel Panel_billetes = new JPanel(new GridBagLayout());
         Panel_billetes.setPreferredSize(new Dimension( 200, 240));
 
         // Agrega Panel_posicion y Panel_extras al Panel_segunda_mitad
@@ -296,8 +305,10 @@ public class Tercer_panel extends JFrame {
         Panel_precio_final.add(new JLabel("Precio Final:"));
         Panel_precio_final.getComponent(0).setFont(new Font("Default", Font.BOLD, 20)); // Cambia la fuente del JLabel (precio final)
 
+        int Precio_Final = numero_personas * 12;
         // Crea el JTextField para mostrar el precio total
-        Importes_precio_total = new JTextField("0,00€", 6);
+        Importes_precio_total = new JTextField(6);
+        Importes_precio_total.setText(String.format("%d,00€", Precio_Final));
         Importes_precio_total.setHorizontalAlignment(SwingConstants.CENTER);
         Importes_precio_total.setEditable(false);
         Importes_precio_total.setBackground(Color.WHITE);
@@ -347,11 +358,25 @@ public class Tercer_panel extends JFrame {
         Boton_cancelar.setIcon(cancelar);
 
 
+        // Agrega el label_img_billete al Panel_billetes
+        Panel_billetes.add(label_img_billete);
+
+
         // Agrega ActionListener al botón de aceptar
         Boton_tick.addActionListener(new ActionListener() { // Se ejecuta cuando se hace click en el botón
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(Tercer_panel.this, "Ya puede retirar su billete."); // Muestra un mensaje
+                if (if_ida) {
+                    ImageIcon img_ida = new ImageIcon("ico_bill_av_ida.png");
+                    img_ida = new ImageIcon(img_ida.getImage().getScaledInstance(350,-1, Image.SCALE_DEFAULT));
+                    label_img_billete.setIcon(img_ida);
+                }
+                else {
+                    ImageIcon img_iv = new ImageIcon("ico_bill_av_iv.png");
+                    img_iv = new ImageIcon(img_iv.getImage().getScaledInstance(350, -1, Image.SCALE_DEFAULT));
+                    label_img_billete.setIcon(img_iv);
+                }
             }
         });
 
@@ -362,11 +387,6 @@ public class Tercer_panel extends JFrame {
                 Vaciar_cancelar(); // Vacía los campos
             }
         });
-
-
-        // Fotos billetes
-        JLabel label_img_billete= new JLabel();
-        Panel_billetes.add(label_img_billete);
     }
 
 
@@ -419,18 +439,12 @@ public class Tercer_panel extends JFrame {
     private void Nuevo_precio_total() {
         // Calcula el precio total
 
-        if (if_ida == true) {
-            ImageIcon img_ida = new ImageIcon("ico_bill_av_ida.png");
-            label_img_billete.setIcon(img_ida);
-        }
-        else {
-            ImageIcon img_iv = new ImageIcon("ico_bill_av_iv.png");
-            label_img_billete.setIcon(img_iv);
-        }
-        int Precio_Final = (Precio_asiento + Precio_embarque + Precio_equipaje) * numero_personas;
+        Float Precio_Final = (Precio_asiento + Precio_embarque + Precio_equipaje + precio_ida + precio_vuelta) * numero_personas;
+
 
         // Actualiza el contenido del JLabel
-        Importes_precio_total.setText(String.format("%d,00€", Precio_Final));
+        Importes_precio_total.setText(String.valueOf(Precio_Final));
+        Importes_precio_total.setText(String.format("%.2f€", Precio_Final));
     }
 
 
@@ -452,7 +466,11 @@ public class Tercer_panel extends JFrame {
         Importes_asiento.setText("12,00€");
         Importes_embarque.setText("0,00€");
         Importes_equipaje.setText("0,00€");
-        Importes_precio_total.setText("0,00€");
+        int Precio_Final = numero_personas * 12;
+        Importes_precio_total.setText(String.format("%d,00€", Precio_Final));
+
+        // Borrar la imagen
+        label_img_billete.setIcon(null);
     }
 
     // Método para mostrar el precio total
