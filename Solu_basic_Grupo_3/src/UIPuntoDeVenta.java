@@ -83,9 +83,6 @@ public class UIPuntoDeVenta {
                 } else if (si== 1){
                     borronCuentaNueva();
                     JOptionPane.showMessageDialog(null, "Todos los ajustes se restablecieron");
-                } else if (si == 2){
-
-                    JOptionPane.showMessageDialog(null, "cancelada");
                 }
             }
         });
@@ -511,9 +508,4 @@ public class UIPuntoDeVenta {
     // Parte Gráfica 3 Vega -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
 
 
-
-    public static void main(String[] args) {
-        UIPuntoDeVenta ui = new UIPuntoDeVenta();
-        ui.iniciar();
-    }
 }
