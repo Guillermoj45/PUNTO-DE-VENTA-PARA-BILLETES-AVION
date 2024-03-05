@@ -427,7 +427,15 @@ public class UIPuntoDeVenta {
         panel.add(boton);
 
         boton.addActionListener(e->{
-            ((JPanel) componentes.get("panel")).add(panel3());
+            // comprobamos que a selecionado uno de los vuelos
+            if (((JRadioButton) componentes.get("ida")).isSelected() && !((JRadioButton) componentes.get("idaPrimeraHora")).isSelected() && !((JRadioButton) componentes.get("idaUltimaHora")).isSelected()){
+                JOptionPane.showMessageDialog(null, "Por favor, seleccione un vuelo de ida");
+
+            }else if (((JRadioButton) componentes.get("idaVuelta")).isSelected() && !((JRadioButton) componentes.get("idaPrimeraHora")).isSelected() && !((JRadioButton) componentes.get("idaUltimaHora")).isSelected() || !((JRadioButton) componentes.get("vueltaPrimeraHora")).isSelected() && !((JRadioButton) componentes.get("vueltaUltimaHora")).isSelected()){
+                JOptionPane.showMessageDialog(null, "Por favor, seleccione un vuelo de ida y uno de vuelta");
+            }else {
+                ((JPanel) componentes.get("panel")).add(panel3());
+            }
         });
         return panel;
     }
