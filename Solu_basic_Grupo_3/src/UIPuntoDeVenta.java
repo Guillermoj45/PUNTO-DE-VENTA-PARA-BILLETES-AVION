@@ -441,7 +441,7 @@ public class UIPuntoDeVenta {
             }else if (((JRadioButton) componentes.get("idaVuelta")).isSelected() && !((JRadioButton) componentes.get("idaPrimeraHora")).isSelected() && !((JRadioButton) componentes.get("idaUltimaHora")).isSelected() || !((JRadioButton) componentes.get("vueltaPrimeraHora")).isSelected() && !((JRadioButton) componentes.get("vueltaUltimaHora")).isSelected()){
                 JOptionPane.showMessageDialog(null, "Por favor, seleccione un vuelo de ida y uno de vuelta");
             }else {
-                ((JPanel) componentes.get("panel")).add(panel3());
+                //TODO: Añadir panel de vega
             }
         });
         return panel;
@@ -506,17 +506,6 @@ public class UIPuntoDeVenta {
 
 
     // Parte Gráfica 3 Vega -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
-    private JPanel panel3(){
-        Tercer_panel tercerPanel = new Tercer_panel();
-        JPanel panel = new JPanel();
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() { // Se ejecuta cuando se inicia la aplicación
-                // Crea un nuevo objeto de la clase Tercer_panel
-                new Tercer_panel().setVisible(true);
-            }
-        });
-        return panel;
-    }
+
 
 }
