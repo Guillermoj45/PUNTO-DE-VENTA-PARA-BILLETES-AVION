@@ -39,6 +39,8 @@ public class UIPuntoDeVenta {
     }
 
     private JPanel tituloPanel(){
+
+        // creamos el panel
         JPanel titulo = new JPanel();
         JLabel texto = new JLabel("PUNTOS DE VENTA DE BILLETES");
 
@@ -51,36 +53,48 @@ public class UIPuntoDeVenta {
     }
 
     private JPanel panelCentral(){
+        // creamos el panel
         JPanel panelCentral = new JPanel();
 
+        // aplicamos un borde al panel
         panelCentral.setLayout(new GridLayout(1, 2, 40, 0));
         panelCentral.add(panelIzquierdo());
         panelCentral.add(panelDerecho());
 
+        // añadimos el panel al diccionario
         JButton boton = (JButton) componentes.get("Buscar");
         boton.addActionListener(e->{
 
+            // comprobamos que a selecionado un origen y un destino
             if (((JComboBox<?>) componentes.get("Origen")).getSelectedItem().equals("-------------") || ((JComboBox<?>) componentes.get("Destino")).getSelectedItem().equals("-------------")){
+                // mostramos un mensaje de error
                 JOptionPane.showMessageDialog(null, "Por favor, seleccione un origen y un destino");
             }
             else {
+                // preguntamos si quiere hacer una nueva cuenta
                 int si = JOptionPane.showConfirmDialog(null, mensajes());
 
+                // sí quiere hacer una nueva cuenta
                 if (si == 0) {
 
+                    // comprobamos si hay un panel 2
                     if (((JPanel)(componentes.get("panel"))).getComponentCount() > 1){
 
+                        // eliminamos el panel 2
                         ((JPanel) componentes.get("panel")).remove(1);
-
                     }
 
+                    // obtenemos el número de personas
                     numeroDePerosnas = ((Integer) ((JSpinner) componentes.get("NumPersonas")).getValue());
 
+                    // añadimos el panel 2
                     ((JPanel) componentes.get("panel")).add(panel2());
 
+                    // actualizamos el frame
                     frame.pack();
 
-                } else if (si== 1){
+                } // si no quiere hacer una nueva cuenta
+                else if (si== 1){
                     borronCuentaNueva();
                     JOptionPane.showMessageDialog(null, "Todos los ajustes se restablecieron");
                 }
@@ -91,6 +105,7 @@ public class UIPuntoDeVenta {
     }
 
     private String mensajes (){
+        // Un if para que te muestre el mensaje correcto
         String mensaje = null;
         if (((JRadioButton) componentes.get("ida")).isSelected() && ((JSpinner) componentes.get("NumPersonas")).getValue().equals(1)) {
 
@@ -118,10 +133,12 @@ public class UIPuntoDeVenta {
     }
 
     private void borronCuentaNueva(){
+        // Eliminamos el panel y lo generamos de nuevo
         ((JPanel) componentes.get("panel")).removeAll();
         JPanel panel = (JPanel) componentes.get("panel");
         componentes.clear();
 
+        // añadimos los componentes al panel
         panel.add(primerPanel());
         addComponente("panel", panel);
         componentes.get("panel").revalidate();
@@ -129,6 +146,7 @@ public class UIPuntoDeVenta {
     }
 
     private JPanel panelPrincipal(){
+        // creamos el panel
         JPanel PanelPrincipal = new JPanel();
         PanelPrincipal.add(primerPanel());
         PanelPrincipal.setBorder(BorderFactory.createRaisedBevelBorder());
@@ -138,17 +156,22 @@ public class UIPuntoDeVenta {
 
         return PanelPrincipal;
     }
+
     private JPanel panelIzquierdo(){
+        // creamos el panel
         JPanel panelIzquierdo = new JPanel();
 
+        // aplicamos un borde al panel
         panelIzquierdo.setLayout (new GridLayout(3, 0, 0, 0));
         panelIzquierdo.add(modalidad());
         JPanel fechaida = panelFechas("Fecha de Ida");
         JPanel fechavuelta = panelFechas("Fecha Vuelta");
 
+        // añadimos los paneles al panel
         panelIzquierdo.add(fechaida);
         panelIzquierdo.add(fechavuelta);
 
+        // añadimos los componentes al diccionario
         addComponente("Dia", fechaida.getComponent(1));
         addComponente("Mes", fechaida.getComponent(3));
         addComponente("Anio", fechaida.getComponent(5));
@@ -170,19 +193,23 @@ public class UIPuntoDeVenta {
         JSpinner mesVuelta = (JSpinner) ((JPanel) panelIzquierdo.getComponent(2)).getComponent(3);
         JSpinner anioVuelta = (JSpinner) ((JPanel) panelIzquierdo.getComponent(2)).getComponent(5);
 
-
+        // Creamos una interfaz funcionar con expression lambda para que las fechas de ida y vuelta sean iguales
         dias.addChangeListener(e->{
             if (componentes.get("DiaVuelta").isEnabled()) {
                 int dia = (int) dias.getValue();
                 diaVuelta.setValue(dia);
             }
         });
+
+        // Creamos una interfaz funcionar con expression lambda para que las fechas de ida y vuelta sean iguales
         mes.addChangeListener(e->{
             if (componentes.get("DiaVuelta").isEnabled()) {
                 String mes1 = (String) mes.getValue();
                 mesVuelta.setValue(mes1);
             }
         });
+
+        // Creamos una interfaz funcionar con expression lambda para que las fechas de ida y vuelta sean iguales
         anio.addChangeListener(e->{
             if (componentes.get("DiaVuelta").isEnabled()) {
                 int anio1 = (int) anio.getValue();
@@ -190,7 +217,6 @@ public class UIPuntoDeVenta {
             }
         });
 
-        // Creamos una interfaz funcionar con expression lambda para que las fechas de ida y vuelta sean iguales
         // Declaramos las variables que luego usaremos para bloquear y desbloquear los paneles
         JPanel panel = (JPanel) panelIzquierdo.getComponent(0);
         JRadioButton ida = (JRadioButton) panel.getComponent(0);
@@ -218,6 +244,7 @@ public class UIPuntoDeVenta {
         return panelIzquierdo;
     }
 
+    // Hacemos que bloquee o desbloquee los componentes
     private void bloqueoComponente(Component componente){
         for (Component c : ((Container) componente).getComponents()) {
             c.setEnabled(false);
@@ -230,18 +257,22 @@ public class UIPuntoDeVenta {
         }
     }
 
+    // Creamos el panel de modalidad
     private JPanel modalidad(){
         JPanel panelModalidad = new JPanel();
 
+        // creamos los botones
         JRadioButton ida = new JRadioButton("Ida Sólo");
         JRadioButton idaVuelta = new JRadioButton("Ida/Vuelta");
         ButtonGroup grupo = new ButtonGroup();
         ida.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50));
         idaVuelta.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50));
 
+        // añadimos los botones al panel
         addComponente("ida", ida);
         addComponente("idaVuelta", idaVuelta);
 
+        // añadimos los botones al panel
         panelModalidad.add(ida);
         panelModalidad.add(idaVuelta);
 
@@ -250,6 +281,7 @@ public class UIPuntoDeVenta {
         centerBorder.setTitleJustification(TitledBorder.CENTER);
         panelModalidad.setBorder(centerBorder);
 
+        // añadimos los botones al grupo
         grupo.add(ida);
         grupo.add(idaVuelta);
 
@@ -257,14 +289,17 @@ public class UIPuntoDeVenta {
     }
 
     private JPanel panelFechas(String titulo){
+        // creamos el panel de fechas
         JPanel fechaIda = new JPanel();
         JSpinner dias = new JSpinner(new SpinnerNumberModel(1, 1, 31, 1));
 
+        // Hacemos que el tamaño del JSpinner sea fijo
         dias.setPreferredSize(new Dimension(50, (int) dias.getPreferredSize().getHeight()));
 
         // Hacemos que días no se pueda cambiar manualmente
         dias.setEditor(new JSpinner.DefaultEditor(dias));
 
+        // Creamos un array con los nombres de los meses
         String[] nombreMes = { "Enero", "Febrero", "Marzo",
                 "Abril", "Mayo", "Junio", "Julio", "Agosto",
                 "Septiembre", "Octubre", "Noviembre", "Diciembre"};
@@ -283,6 +318,8 @@ public class UIPuntoDeVenta {
         anios.setEditor(new JSpinner.DefaultEditor(anios));
 
         //TODO: Optimizar esta parte (si da tiempo)
+
+        // Actualizaciones de los Meses
         meses.addChangeListener(e -> {
                 String mes = (String) meses.getValue();
                 int diasMes;
@@ -294,6 +331,7 @@ public class UIPuntoDeVenta {
                 }
         });
 
+        // Actualizaciones de los Años
         anios.addChangeListener(e ->{
             String mes = (String) meses.getValue();
             int diasMes;
@@ -305,6 +343,7 @@ public class UIPuntoDeVenta {
             }
         });
 
+        // añadimos los componentes al panel
         fechaIda.add(new JLabel("Día"));
         fechaIda.add(dias);
         fechaIda.add(new JLabel("Mes"));
@@ -318,19 +357,23 @@ public class UIPuntoDeVenta {
 
     private JPanel panelDerecho(){
         JPanel trayecto = new JPanel();
+
+        // dibujamos un borde alrededor del panel con el título "Trayecto" centrado
         trayecto.setLayout(new GridLayout(3, 1, 0, 0));
         TitledBorder centerBorder = BorderFactory.createTitledBorder("Trayecto");
         centerBorder.setTitleJustification(TitledBorder.CENTER);
         trayecto.setBorder(centerBorder);
 
+        // añadimos los paneles al panel
         JPanel origen = jBoxLugares(" Origen: ");
         JPanel destino = jBoxLugares("Destino: ");
         JPanel personas = Personas();
 
+        // añadimos los componentes al diccionario
         addComponente("Origen", origen.getComponent(1));
         addComponente("Destino", destino.getComponent(1));
 
-
+        // Creamos un listener para que cuando cambie el origen, cambie el destino
         ((JComboBox<?>) origen.getComponent(1)).addActionListener(e -> {
             JComboBox<?> ida = (JComboBox<?>) e.getSource();
             String lugar = (String) ida.getSelectedItem();
@@ -339,6 +382,7 @@ public class UIPuntoDeVenta {
             trayecto.revalidate();
         });
 
+        // añadimos los paneles al panel
         origen.setBounds(50, 50, 90, 20);
         trayecto.add(origen);
         trayecto.add(destino);
@@ -346,6 +390,7 @@ public class UIPuntoDeVenta {
         return trayecto;
     }
 
+    //Creamos el pane de personas
     private JPanel Personas(){
         JPanel personas = new JPanel();
         personas.add(new JLabel("Nº personas: "));
@@ -377,6 +422,7 @@ public class UIPuntoDeVenta {
         return datos;
     }
 
+    // Creamos el panel de lugares
     private JPanel jBoxLugares(String texto){
         JPanel datos = new JPanel();
         JComboBox <String> origen = new JComboBox<>();
@@ -410,6 +456,7 @@ public class UIPuntoDeVenta {
 
     private JPanel panel2(){
         JPanel panel = new JPanel();
+        // Aplicamos bordes y además añadimos los componentes al panel
         panel.setLayout(new BorderLayout());
         panel.add(titulo2P(), BorderLayout.NORTH);
         panel.add(idaVuelta(), BorderLayout.CENTER);
