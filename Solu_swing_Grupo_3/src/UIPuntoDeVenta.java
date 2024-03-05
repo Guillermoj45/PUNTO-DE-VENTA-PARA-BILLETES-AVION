@@ -18,6 +18,8 @@ public class UIPuntoDeVenta {
     Integer numeroDePerosnas;
     Float precioIda;
     Float precioTotalVuelta;
+    String [] holo;
+    String [] holo1;
 
     protected void iniciar(){
         frame = new JFrame("Air Camela");
@@ -476,7 +478,18 @@ public class UIPuntoDeVenta {
         boton.addActionListener(e -> {
             //todo HO
             // Comprobamos que a seleccionado un origen y un destino
-            boolean hola = ((JRadioButton) componentes.get("ida")).isSelected();
+
+            if (((JRadioButton) componentes.get("idaPrimeraHora")).isSelected()){
+                precioIda = Float.valueOf(holo[1]);
+            }else {
+                precioIda = Float.valueOf(holo[2]);
+            }
+            if (((JRadioButton) componentes.get("vueltaPrimeraHora")).isSelected()){
+                precioTotalVuelta = Float.valueOf(holo1[1]);
+            } else if (((JRadioButton) componentes.get("vueltaUltimaHora")).isSelected()){
+                precioTotalVuelta = Float.valueOf(holo1[2]);
+            }
+
             if (((JRadioButton) componentes.get("ida")).isSelected()) {
                 if (!((JRadioButton) componentes.get("idaPrimeraHora")).isSelected() && !((JRadioButton) componentes.get("idaUltimaHora")).isSelected()) {
                     JOptionPane.showMessageDialog(null, "Por favor, seleccione un vuelo de ida");
@@ -500,10 +513,10 @@ public class UIPuntoDeVenta {
                     frame.pack();
                 }
             }
-
         });
         return panel;
     }
+
 
     private JPanel idaVuelta(){
         JPanel panel = new JPanel();
@@ -511,14 +524,12 @@ public class UIPuntoDeVenta {
 
         String Origen = (String) ((JComboBox<?>) componentes.get("Origen")).getSelectedItem();
         String Destino = (String) ((JComboBox<?>) componentes.get("Destino")).getSelectedItem();
-        String [] holo = ApoyoPuntoVenta.recoDate(Origen, Destino);
-
-        precioIda = Float.parseFloat(holo[1]);
-        precioTotalVuelta = Float.parseFloat(holo[2]);
+        holo = ApoyoPuntoVenta.recoDate(Origen, Destino);
+        holo1 = ApoyoPuntoVenta.recoDate(Destino, Origen);
 
 
         JPanel ida = idaDispo(holo[0], "Ida");
-        JPanel vuelta = idaDispo(holo[0], "Vuelta");
+        JPanel vuelta = idaDispo(holo1[0], "Vuelta");
 
         panel.add(ida);
         if (((JRadioButton) componentes.get("idaVuelta")).isSelected()){
@@ -527,6 +538,7 @@ public class UIPuntoDeVenta {
             panel.add(new JPanel());
         }
 
+        //todo:datos
         // añadimos los componentes al diccionario
         addComponente("idaPrimeraHora", ida.getComponent(0));
         addComponente("idaUltimaHora", ida.getComponent(1));

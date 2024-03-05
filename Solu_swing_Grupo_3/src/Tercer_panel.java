@@ -438,9 +438,17 @@ public class Tercer_panel extends JFrame {
     // Método para actualizar el precio total
     private void Nuevo_precio_total() {
         // Calcula el precio total
+        Float Precio_Final;
 
-        Float Precio_Final = (Precio_asiento + Precio_embarque + Precio_equipaje + precio_ida + precio_vuelta) * numero_personas;
+        System.out.println(precio_ida);
+        System.out.println(precio_vuelta);
 
+        if (if_ida) {
+            Precio_Final = (Precio_asiento + Precio_embarque + Precio_equipaje + precio_ida) * numero_personas;
+        }
+        else {
+            Precio_Final = (Precio_asiento + Precio_embarque + Precio_equipaje + precio_ida + precio_vuelta) * numero_personas;
+        }
 
         // Actualiza el contenido del JLabel
         Importes_precio_total.setText(String.valueOf(Precio_Final));
