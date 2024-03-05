@@ -472,19 +472,33 @@ public class UIPuntoDeVenta {
         panel.add(boton);
 
         boton.addActionListener(e -> {
-            // comprobamos que a selecionado uno de los vuelos
-            if (((JRadioButton) componentes.get("ida")).isSelected() && !((JRadioButton) componentes.get("idaPrimeraHora")).isSelected() && !((JRadioButton) componentes.get("idaUltimaHora")).isSelected()){
-                JOptionPane.showMessageDialog(null, "Por favor, seleccione un vuelo de ida");
+            //todo HO
+            // Comprobamos que a seleccionado un origen y un destino
+            boolean hola = ((JRadioButton) componentes.get("ida")).isSelected();
+            if (((JRadioButton) componentes.get("ida")).isSelected()) {
+                if (!((JRadioButton) componentes.get("idaPrimeraHora")).isSelected() && !((JRadioButton) componentes.get("idaUltimaHora")).isSelected()) {
+                    JOptionPane.showMessageDialog(null, "Por favor, seleccione un vuelo de ida");
 
-            } else if (((JRadioButton) componentes.get("idaVuelta")).isSelected() && !((JRadioButton) componentes.get("idaPrimeraHora")).isSelected() && !((JRadioButton) componentes.get("idaUltimaHora")).isSelected() || !((JRadioButton) componentes.get("vueltaPrimeraHora")).isSelected() && !((JRadioButton) componentes.get("vueltaUltimaHora")).isSelected()){
-                JOptionPane.showMessageDialog(null, "Por favor, seleccione un vuelo de ida y uno de vuelta");
+                }
+                else {
+                    //TODO: Añadir panel de vega
+                    Tercer_panel tercerPanel = new Tercer_panel();
+                    ((JPanel) componentes.get("panel")).add(tercerPanel.Tercer_panel(numeroDePerosnas, ((JRadioButton) componentes.get("ida")).isSelected()));
+                    frame.pack();
+                }
             }
-            else {
-                //TODO: Añadir panel de vega
-                Tercer_panel tercerPanel = new Tercer_panel();
-                ((JPanel) componentes.get("panel")).add(tercerPanel.Tercer_panel());
-                frame.pack();
+            else if (((JRadioButton) componentes.get("idaVuelta")).isSelected()) {
+                if (!((JRadioButton) componentes.get("idaPrimeraHora")).isSelected() && !((JRadioButton) componentes.get("idaUltimaHora")).isSelected() || !((JRadioButton) componentes.get("vueltaPrimeraHora")).isSelected() && !((JRadioButton) componentes.get("vueltaUltimaHora")).isSelected()) {
+                    JOptionPane.showMessageDialog(null, "Por favor, seleccione un vuelo de ida y uno de vuelta");
+                }
+                else {
+                    //TODO: Añadir panel de vega
+                    Tercer_panel tercerPanel = new Tercer_panel();
+                    ((JPanel) componentes.get("panel")).add(tercerPanel.Tercer_panel(numeroDePerosnas, ((JRadioButton) componentes.get("ida")).isSelected()));
+                    frame.pack();
+                }
             }
+
         });
         return panel;
     }
