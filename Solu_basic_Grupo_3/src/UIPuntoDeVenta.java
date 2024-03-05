@@ -481,6 +481,9 @@ public class UIPuntoDeVenta {
             }
             else {
                 //TODO: Añadir panel de vega
+                Tercer_panel tercerPanel = new Tercer_panel();
+                ((JPanel) componentes.get("panel")).add(tercerPanel.Tercer_panel());
+                frame.pack();
             }
         });
         return panel;
