@@ -64,14 +64,12 @@ public class UIPuntoDeVenta {
 
         JButton boton = (JButton) componentes.get("Buscar");
         boton.addActionListener(e->{
-            String mensaje = null;
+
             if (((JComboBox<?>) componentes.get("Origen")).getSelectedItem().equals("-------------") || ((JComboBox<?>) componentes.get("Destino")).getSelectedItem().equals("-------------")){
                 JOptionPane.showMessageDialog(null, "Por favor, seleccione un origen y un destino");
             }
             else {
-                mensaje = mensajes(mensaje);
-
-                int si = JOptionPane.showConfirmDialog(null, mensaje);
+                int si = JOptionPane.showConfirmDialog(null, mensajes());
 
                 if (si == 0) {
 
@@ -100,7 +98,8 @@ public class UIPuntoDeVenta {
         return panelCentral;
     }
 
-    private String mensajes (String mensaje){
+    private String mensajes (){
+        String mensaje = null;
         if (((JRadioButton) componentes.get("ida")).isSelected() && ((JSpinner) componentes.get("NumPersonas")).getValue().equals(1)) {
 
             mensaje = "Ida: " + ((JComboBox<?>) componentes.get("Origen")).getSelectedItem() + "/" + ((JComboBox<?>) componentes.get("Destino")).getSelectedItem() + " " + ((JSpinner) componentes.get("Dia")).getValue() + "-" + ((JSpinner) componentes.get("Mes")).getValue() + "-" + ((JSpinner) componentes.get("Anio")).getValue() + "\n";
@@ -415,7 +414,7 @@ public class UIPuntoDeVenta {
         return granPanel;
     }
 
-    // Parte Gráfica 2 Pablo -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
+    // Parte Gráfica 2 Pablo (QUE AL FINAL HA HECHO GUILLE) -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
 
     private JPanel panel2(){
         JPanel panel = new JPanel();
@@ -480,6 +479,7 @@ public class UIPuntoDeVenta {
         // creamos el panel
         JPanel panel = new JPanel();
 
+        // aplicamos un borde al panel
         panel.setBorder(BorderFactory.createTitledBorder(Ettiqueta));
         panel.setLayout(new GridLayout(3, 1, 0, 0));
         String[] datos = Primero.split("\n");
