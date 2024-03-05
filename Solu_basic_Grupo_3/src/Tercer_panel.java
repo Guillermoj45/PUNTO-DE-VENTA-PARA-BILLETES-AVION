@@ -44,7 +44,7 @@ public class Tercer_panel extends JFrame {
     public JPanel Tercer_panel() {
         // Configuración del frame
         setTitle("Air Camela");
-        setSize(800, 400); // Ajusta el tamaño del frame
+ // Ajusta el tamaño del frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Tercer_panel = new JPanel();
@@ -58,7 +58,7 @@ public class Tercer_panel extends JFrame {
 
         // Creación de los paneles
         Panel_detalles = new JPanel(new GridLayout(2, 1));
-        Panel_detalles.setPreferredSize(new Dimension(400, 400));
+
 
         Panel_segunda_parte = new JPanel();
         Panel_segunda_parte.setLayout(new BoxLayout(Panel_segunda_parte, BoxLayout.Y_AXIS));
@@ -217,7 +217,7 @@ public class Tercer_panel extends JFrame {
         JPanel Panel_importes = new JPanel();
 
         JPanel Panel_billetes = new JPanel();
-        Panel_billetes.setPreferredSize(new Dimension(600, 240));
+        Panel_billetes.setPreferredSize(new Dimension( 200, 240));
 
         // Agrega Panel_posicion y Panel_extras al Panel_segunda_mitad
         Panel_segunda_parte.add(Panel_importes);
