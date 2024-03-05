@@ -440,8 +440,6 @@ public class Tercer_panel extends JFrame {
         // Calcula el precio total
         Float Precio_Final;
 
-        System.out.println(precio_ida);
-        System.out.println(precio_vuelta);
 
         if (if_ida) {
             Precio_Final = (Precio_asiento + Precio_embarque + Precio_equipaje + precio_ida) * numero_personas;
