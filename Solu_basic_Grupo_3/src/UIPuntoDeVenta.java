@@ -12,12 +12,12 @@ import java.util.Locale;
 
 public class UIPuntoDeVenta {
      JFrame frame;
-    public static void main(String[] args) {
-        UIPuntoDeVenta ui = new UIPuntoDeVenta();
-        ui.iniciar();
-    }
+    HashMap<String,Component> componentes = new HashMap<>();
 
-    private void iniciar(){
+    // TODO: Para vega :=)
+    Integer numeroDePerosnas;
+
+    protected void iniciar(){
         frame = new JFrame("Air Camela");
 
         frame.setSize(600, 700);
@@ -33,11 +33,6 @@ public class UIPuntoDeVenta {
     }
 
     // Parte Gráfica 1 Guillermo -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
-
-     HashMap<String,Component> componentes = new HashMap<>();
-
-    // TODO: Para vega :=)
-     Integer numeroDePerosnas;
 
     private void addComponente(String nombre, Component componente){
         componentes.put(nombre, componente);
@@ -516,4 +511,9 @@ public class UIPuntoDeVenta {
     // Parte Gráfica 3 Vega -- Se debe de hacer en un panel para facilitar la implementación con devolución del panel
 
 
+
+    public static void main(String[] args) {
+        UIPuntoDeVenta ui = new UIPuntoDeVenta();
+        ui.iniciar();
+    }
 }
