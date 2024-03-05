@@ -433,14 +433,15 @@ public class UIPuntoDeVenta {
         boton.setPreferredSize(new Dimension(170, 25));
         panel.add(boton);
 
-        boton.addActionListener(e->{
+        boton.addActionListener(e -> {
             // comprobamos que a selecionado uno de los vuelos
             if (((JRadioButton) componentes.get("ida")).isSelected() && !((JRadioButton) componentes.get("idaPrimeraHora")).isSelected() && !((JRadioButton) componentes.get("idaUltimaHora")).isSelected()){
                 JOptionPane.showMessageDialog(null, "Por favor, seleccione un vuelo de ida");
 
-            }else if (((JRadioButton) componentes.get("idaVuelta")).isSelected() && !((JRadioButton) componentes.get("idaPrimeraHora")).isSelected() && !((JRadioButton) componentes.get("idaUltimaHora")).isSelected() || !((JRadioButton) componentes.get("vueltaPrimeraHora")).isSelected() && !((JRadioButton) componentes.get("vueltaUltimaHora")).isSelected()){
+            } else if (((JRadioButton) componentes.get("idaVuelta")).isSelected() && !((JRadioButton) componentes.get("idaPrimeraHora")).isSelected() && !((JRadioButton) componentes.get("idaUltimaHora")).isSelected() || !((JRadioButton) componentes.get("vueltaPrimeraHora")).isSelected() && !((JRadioButton) componentes.get("vueltaUltimaHora")).isSelected()){
                 JOptionPane.showMessageDialog(null, "Por favor, seleccione un vuelo de ida y uno de vuelta");
-            }else {
+            }
+            else {
                 //TODO: Añadir panel de vega
             }
         });
@@ -449,6 +450,8 @@ public class UIPuntoDeVenta {
 
     private JPanel idaVuelta(){
         JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1, 3, 0, 0));
+
         String Origen = (String) ((JComboBox<?>) componentes.get("Origen")).getSelectedItem();
         String Destino = (String) ((JComboBox<?>) componentes.get("Destino")).getSelectedItem();
 
@@ -459,11 +462,11 @@ public class UIPuntoDeVenta {
         panel.add(ida);
         if (((JRadioButton) componentes.get("idaVuelta")).isSelected()){
             panel.add(vuelta);
-            panel.setLayout(new GridLayout(1, 2, 0, 0));
-        }else {
-            panel.setLayout(new GridLayout(1, 1, 0, 0));
+        }else{
+            panel.add(new JPanel());
         }
 
+        // añadimos los componentes al diccionario
         addComponente("idaPrimeraHora", ida.getComponent(0));
         addComponente("idaUltimaHora", ida.getComponent(1));
         addComponente("vueltaPrimeraHora", vuelta.getComponent(0));
@@ -473,20 +476,25 @@ public class UIPuntoDeVenta {
     }
 
     private JPanel idaDispo(String Primero, String Ettiqueta){
+
+        // creamos el panel
         JPanel panel = new JPanel();
+
         panel.setBorder(BorderFactory.createTitledBorder(Ettiqueta));
-        panel.setLayout(new GridLayout(2, 1, 0, 0));
+        panel.setLayout(new GridLayout(3, 1, 0, 0));
         String[] datos = Primero.split("\n");
 
+        // creamos los botones
         JRadioButton ida = new JRadioButton(datos[0]);
         JRadioButton idaVuelta = new JRadioButton(datos[1]);
         ButtonGroup grupo = new ButtonGroup();
 
-
+        // añadimos los botones al panel
         panel.add(ida);
         panel.add(idaVuelta);
         grupo.add(ida);
         grupo.add(idaVuelta);
+
         return panel;
     }
 
