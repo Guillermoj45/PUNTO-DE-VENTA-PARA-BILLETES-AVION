@@ -58,7 +58,7 @@ public class UIPuntoDeVenta {
     private JPanel panelCentral(){
         JPanel panelCentral = new JPanel();
 
-        panelCentral.setLayout(new GridLayout(1, 2, 0, 0));
+        panelCentral.setLayout(new GridLayout(1, 2, 40, 0));
         panelCentral.add(panelIzquierdo());
         panelCentral.add(panelDerecho());
 
@@ -126,7 +126,7 @@ public class UIPuntoDeVenta {
         JPanel panel = (JPanel) componentes.get("panel");
         componentes.clear();
 
-        (panel).add(primerPanel());
+        panel.add(primerPanel());
         addComponente("panel", panel);
         componentes.get("panel").revalidate();
         frame.pack();
@@ -145,7 +145,7 @@ public class UIPuntoDeVenta {
     private JPanel panelIzquierdo(){
         JPanel panelIzquierdo = new JPanel();
 
-        panelIzquierdo.setLayout (new GridLayout(3, 1, 0, 0));
+        panelIzquierdo.setLayout (new GridLayout(3, 0, 0, 0));
         panelIzquierdo.add(modalidad());
         JPanel fechaida = panelFechas("Fecha de Ida");
         JPanel fechavuelta = panelFechas("Fecha Vuelta");
@@ -237,9 +237,11 @@ public class UIPuntoDeVenta {
     private JPanel modalidad(){
         JPanel panelModalidad = new JPanel();
 
-        JRadioButton ida = new JRadioButton("Solo Ida");
+        JRadioButton ida = new JRadioButton("Ida Sólo");
         JRadioButton idaVuelta = new JRadioButton("Ida/Vuelta");
         ButtonGroup grupo = new ButtonGroup();
+        ida.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50));
+        idaVuelta.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50));
 
         addComponente("ida", ida);
         addComponente("idaVuelta", idaVuelta);
@@ -465,7 +467,7 @@ public class UIPuntoDeVenta {
         return panel;
     }
 
-    private JPanel idaDispo(String Primero,String Ettiqueta){
+    private JPanel idaDispo(String Primero, String Ettiqueta){
         JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createTitledBorder(Ettiqueta));
         panel.setLayout(new GridLayout(2, 1, 0, 0));
