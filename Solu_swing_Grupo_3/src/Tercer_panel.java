@@ -305,10 +305,34 @@ public class Tercer_panel extends JFrame {
         Panel_precio_final.add(new JLabel("Precio Final:"));
         Panel_precio_final.getComponent(0).setFont(new Font("Default", Font.BOLD, 20)); // Cambia la fuente del JLabel (precio final)
 
-        int Precio_Final = numero_personas * 12;
+        int Precio_asiento = 12;
+        Float Precio_Final;
+
+        int num_fila = Seleccion_fila.getValue();
+
+        // Establece el precio según el rango de valores en el slider
+        if (num_fila >= 1 && num_fila <= 6) {
+            Precio_asiento = 12;
+        } else if (num_fila >= 7 && num_fila <= 19) {
+            Precio_asiento = 8;
+        } else {
+            Precio_asiento = 4;
+        }
+
+        if (if_ida) {
+            Precio_Final = (Precio_asiento + Precio_embarque + Precio_equipaje + precio_ida) * numero_personas;
+        }
+        else {
+            Precio_Final = (Precio_asiento + Precio_embarque + Precio_equipaje + precio_ida + precio_vuelta) * numero_personas;
+        }
+
         // Crea el JTextField para mostrar el precio total
         Importes_precio_total = new JTextField(6);
-        Importes_precio_total.setText(String.format("%d,00€", Precio_Final));
+
+        // Actualiza el contenido del JLabel
+        Importes_precio_total.setText(String.valueOf(Precio_Final));
+        Importes_precio_total.setText(String.format("%.2f€", Precio_Final));
+
         Importes_precio_total.setHorizontalAlignment(SwingConstants.CENTER);
         Importes_precio_total.setEditable(false);
         Importes_precio_total.setBackground(Color.WHITE);
@@ -440,6 +464,16 @@ public class Tercer_panel extends JFrame {
         // Calcula el precio total
         Float Precio_Final;
 
+        int num_fila = Seleccion_fila.getValue();
+
+        // Establece el precio según el rango de valores en el slider
+        if (num_fila >= 1 && num_fila <= 6) {
+            Precio_asiento = 12;
+        } else if (num_fila >= 7 && num_fila <= 19) {
+            Precio_asiento = 8;
+        } else {
+            Precio_asiento = 4;
+        }
 
         if (if_ida) {
             Precio_Final = (Precio_asiento + Precio_embarque + Precio_equipaje + precio_ida) * numero_personas;
@@ -472,8 +506,21 @@ public class Tercer_panel extends JFrame {
         Importes_asiento.setText("12,00€");
         Importes_embarque.setText("0,00€");
         Importes_equipaje.setText("0,00€");
-        int Precio_Final = numero_personas * 12;
-        Importes_precio_total.setText(String.format("%d,00€", Precio_Final));
+
+
+        Float Precio_Final;
+        Precio_asiento = 12;
+
+        if (if_ida) {
+            Precio_Final = (Precio_asiento + Precio_embarque + Precio_equipaje + precio_ida) * numero_personas;
+        }
+        else {
+            Precio_Final = (Precio_asiento + Precio_embarque + Precio_equipaje + precio_ida + precio_vuelta) * numero_personas;
+        }
+
+        // Establece el contenido del JTextField a 0,00€
+        Importes_precio_total.setText(String.valueOf(Precio_Final));
+        Importes_precio_total.setText(String.format("%.2f€", Precio_Final));
 
         // Borrar la imagen
         label_img_billete.setIcon(null);
