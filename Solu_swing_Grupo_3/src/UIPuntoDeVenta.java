@@ -520,7 +520,7 @@ public class UIPuntoDeVenta {
 
     private JPanel idaVuelta(){
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(1, 3, 0, 0));
+        panel.setLayout(new GridLayout(1, 2, 50, 0));
 
         String Origen = (String) ((JComboBox<?>) componentes.get("Origen")).getSelectedItem();
         String Destino = (String) ((JComboBox<?>) componentes.get("Destino")).getSelectedItem();
